@@ -1,0 +1,64 @@
+---
+title: "Working with Data in R"
+author: "Brian S. Yandell"
+date: "6/29/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Structures in R
+
+There are many good introductions to data structures in `R`.
+Basically, `R` can act as a calculator, and has built in functions such as `log(10)` and `sqrt(4)`,
+but can do so much more. See examples in the links below.
+
+The basic structure in `R` is a vector, here is a vector of the numbers 1 through 5:
+
+```{r}
+1:5
+```
+
+- [R Introdcution from Data Carpentry](http://kbroman.org/datacarpentry_R_2017-01-10/01-intro-to-R.html)
+- [R basics from Jenny Bryan](http://stat545.com/block002_hello-r-workspace-wd-project.html)
+- [R Introduction from Doug Bates](https://github.com/dmbates/stat692/blob/master/Intro.Rmd)
+
+However, it is often more useful to think of `R` as mostly operating on tables, which have many of the characteristics of spreadsheets. Tables, known in `R` as data frames, have observations, sometimes called individuals or cases, in rows and variables, or fields, in columns. The variables might be of different types, say numeric or character or logical. We might want to operate on the whole table, or on a row or column, or on some rectangular subset of the table.
+
+## Data Wrangling
+
+
+
+### dplyr
+
+### tidyr
+
+### purrr
+
+## Working with strings
+
+Sometimes one may want to change names of columns in a table. Here is what might seem like a logical approach, but it is in fact difficult to read, awkward and repetitive, and slow.
+
+```
+new_names=list()
+l=1
+for(n in colnames(x)){
+      ifelse((l<10), (colnames(x)[l]=c(paste0('Otu000',c(l)))), (colnames(x)[l]=c(paste0('Otu00',c(l))))) 
+      new_names=append(new_names, colnames(x)[l])
+      l=l+1
+}
+```
+
+Here is an improved 
+```
+new_names <- paste0("Otu", stringr::str_pad(seq_along(colnames(x)), 4, pad="0"))
+```
+
+## Reading and writing tables
+
+- read.csv and readr::read_csv
+- write.csv and write::write_csv
+- readxl::read_excel
+

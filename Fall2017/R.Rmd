@@ -1,0 +1,74 @@
+---
+title: "Getting to know R"
+author: "Brian S. Yandell"
+date: "6/29/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Some R history
+
+[R](https://www.r-project.org/) was developed in the late 1980s in New Zealand by [Ross Ihaka and Robert Gentleman](http://blog.revolutionanalytics.com/2012/06/the-influences-that-shaped-r-inferno-ish-r.html), known as `R & R`. It was built on LISP language ideas adopting the syntax of the `S` language, which was in turn created by John Chambers and colleagues at AT&T in the 1970s. While `S` was proprietary, limiting distribution, `R` has been freely available and open source since the beginning. Since the 1997, `R` has been maintained by a core development team of about 20 people. For more information, see <https://www.r-project.org/about.html>.
+
+Originally, `R` ran on a "dumb" terminal. There were many efforts to build a useful graphical user interface, or GUI. [RStudio](http://www.rstudio.com) was founded in 2008 with public release in 2011, and was quickly adopted by the `R` community. See <https://www.rstudio.com/about/>.
+
+## Basics of RStudio
+
+`RStudio` has four panes to organize the page:
+
+1. Scripts (top-left)
+2. R console (bottom-left)
+3. Files/plots/help/etc (bottom-right)
+4. Environment/history (top-right)
+
+The R console is the basic "dumb" terminal for `R`, where you can type commands directly.
+
+These panes can be rearranged if desired. There are shortcuts to focus on just one pane:
+<kbd>`Ctrl`</kbd> + <kbd>`Shift`</kbd> + <kbd>`2`</kbd>
+focuses on the R console pane. Use <kbd>`Ctrl`</kbd> +
+<kbd>`Shift`</kbd> + <kbd>`0`</kbd> to return to all four panes.
+
+Each pane potentially has multiple tabs with useful information. For instance, pane 3 (bottom-right) has `Files`, `Plots`, `Help` and other tabs. Just click on one to bring it forward.
+
+**Help** on commands can be found with the `Help` tab of pane 4, typing in `log` where the magnifying glass is. Alternatively, type on the `Console`, pane 2, either
+
+```
+help(log)
+```
+
+or
+
+```
+?log
+```
+
+to bring up the `log` help page. Another way to get help is to start typing a command and then pause. A yellow popup will appear with a condensed version of the help page.
+
+## R project
+
+It is useful to organize `R` work into projects. Click `File → New Project → Existing directory → Browse for folder`; find folder where you want to work; click `Open`. Then click `Create project`. You can also create a new directory if preferred.
+
+The "working directory" is the folder where you do `R` work. You can use the command `getwd()` to find out what the working directory is. Here is a sample layout (from Data Carpentry lesson) with some suggested sub-folder names to further organize work:
+
+![](http://www.datacarpentry.org/R-ecology-lesson/img/working-directory-structure.png)
+
+
+## Scripts
+
+Within your project, you can create or save files.
+The top-right Source pane (1) is a place to build scripts, that is, flat files with commands and comments. [Comments begin with the sharp `#` character.] Click the green circle with plus at top left and click `R Script` to creat an `Untitled` script. Save this (Either `File → Save` or the floppy disk icon); you will be asked to supply a name, and prompted where you want to put it. At this point you can create a `New Folder` (bottom left of save popup) and name it `scripts` if you like.
+
+The top-left pane (4) has a `History` tab that shows all commands you have typed. You can highlight lines and move them `To Source`.
+
+Be sure to save your script file frequently.
+
+## R Environment and Closing out RStudio
+
+`R` works by creating local files in the `Environment` (see pane 4, top-right). These are local objects in your `R` workspace only present during your active session. They do not exist as files outside of `R`.
+
+It is good practice to NOT save your workspace, but instead recreate your work from scripts every time. To enforce that use the menu: `Tools → Global Options ...` and set `Save workspace to .RData on exit` to <kbd>`never`</kbd>. Also, unclick the box for `Restore .RData into workspace at startup`. These force you to be explicit each time about what objects you are working with.
+
+You exit from RStudio in the usual manner for apps on your system. For instance, click `RStudio` in upper right of top ribbon and then click `Quit RStudio`.
