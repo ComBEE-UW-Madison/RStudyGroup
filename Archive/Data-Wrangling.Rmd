@@ -1,0 +1,187 @@
+---
+title: "Data-Wrangling-in-R"
+author: "Elizabeth McDaniel"
+date: "3/14/2017"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE)
+library(knitr)
+library(rmarkdown)
+```
+
+# **Data Wrangling in R**
+
+## Introduction and Purpose
+A few years ago, the New York Times published an [article](https://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0) about the "janitor work" of a data scientist. They quoted: _"Data scientists... spend from 50 to 80 percent of their time mired in the mudane labor of collecting and preparing data, before it can be explored for useful information."_ Before you can begin searching for answers to your interesting biological questions in your datasets, your data must be clean and accessible. This involves much more than cut/paste techniques in Microsoft Excel. There are numerous handy packages in R such as [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/), and [reshape2](http://seananderson.ca/2013/10/19/reshape.html). Oftentimes, we refer to data cleaning, organization, and eventually visualization with [ggplot2](http://docs.ggplot2.org/current/) as the [tidyverse](http://tidyverse.org). The tidyverse is a compilation of R packages that are designed to work together towards a data analysis pipeline. A lot of the topics are discussed in Hadley Wickham's new book [R for Data Science](http://r4ds.had.co.nz), which is available online for free! 
+
+Another great resource for data wrangling packages, and using RStudio in general, are these [cheatsheets!](https://www.rstudio.com/resources/cheatsheets/) These are awesome quick references for Base R, R Markdown, the RStudio IDE, and data import, transformation, and visualization. A lot of the examples below come from the cheatsheets and RStudio blogs. 
+
+## Setup
+To use R packages: 
+
+  1. `install.packages("package")`
+  2. `library(package)`
+
+This will install the specific package if you haven't already. In each new R session, you will load the package with the `library` function, usually at the top of your code. Let's load the data wranglig packages:
+```{r}
+library(dplyr)
+library(tidyr)
+library(reshape2)
+```
+
+Next, load the dataset you want to work with and inspect it a little bit: 
+```{r}
+attach(iris)
+head(iris, 10)
+colnames(iris)
+dim(iris)
+```
+
+## Basic Syntax
+
+When tidying your data, the first thing to do is to convert the data to a tbl class, which are easier to examine than data frames. R will display only what will fit on the screen:
+```{r}
+tbl_df(iris)
+iris_df <- tbl_df(iris)
+```
+
+Checking out the data some more: 
+```{r}
+glimpse(iris)
+```
+
+You can also use the `View()` funtion to view the dataset in a spreadsheet-like display. 
+
+Pipes %>%  are useful for passing an object as the first argument of the function. Using pipes makes our code more readable, such as: 
+```{r}
+iris %>% group_by(Species) %>% summarize(avg=mean(Sepal.Width)) %>% arrange(avg)
+```
+
+This is an example of using dplyr where pipes makes our lives much easier. 
+
+# **Dplyr**
+## Subset Observations
+### Rows
+To subset rows that match a logical criteria, use filter:
+```{r}
+filter(iris_df, Sepal.Length > 7)
+```
+This gives us rows that contain a sepal length that is greater than 7. 
+ 
+To remove duplicate rows:
+```{r}
+distinct(iris_df)
+```
+
+To randomly select a portion of rows: 
+```{r}
+sample_frac(iris_df, 0.5, replace=TRUE)
+```
+
+To randomly select "n" about of rows:
+```{r}
+sample_n(iris_df, 10, replace=TRUE)
+```
+
+To select rows by their position:
+```{r}
+slice(iris_df, 10:15)
+```
+This is "slicing and dicing" the data into a particular subset. 
+
+### Columns
+The `select` function is used for subsetting by column name or a particular variable. Remember the column names of the `iris` dataset:
+```{r}
+colnames(iris)
+```
+If we want a subsetted datset with only the columns Sepal.Width, Petal.Length, and Species without changing the original dataframe: 
+```{r}
+select(iris_df, Sepal.Width, Petal.Length, Species)
+```
+This is a good place to use pipes:
+```{r}
+iris_df %>% select(Sepal.Width, Petal.Length, Species)
+```
+
+## Summarizing Data
+
+You can also summarize data with different functions that take a vector of values and return a single value. 
+```{r}
+summarize(iris, avg = mean(Sepal.Length))
+#Using pipes
+iris %>% summarize(avg=mean(Sepal.Length))
+```
+This summarize the data into a single row of values. To do so for each column:
+```{r}
+summarize_each(iris, funs(mean))
+```
+The summarize function can be used for lots of things: 
+```{r}
+iris %>% summarize(first(Sepal.Length))
+iris %>% summarize(min(Sepal.Length))
+iris %>% summarize(n_distinct(Sepal.Length))
+iris %>% summarize(IQR(Sepal.Length))
+```
+## Making New Variables
+
+Use the `mutate` function to make new variables or apply window functions. These apply vectorized functions to columns, which take vectors as input and return vectors of the same length as output. 
+```{r}
+mutate(iris_df, sepal = Sepal.Length + Sepal.Width)
+iris_df %>% mutate(sepal = Sepal.Length + Sepal.Width)
+```
+This added a new column which takes the addition of a row's sepal length the sepal width. 
+
+To create a new column with an applied function and get rid of the original columns, use `transmute`: 
+```{r}
+iris_df %>% transmute(sepal = Sepal.Length + Sepal.Width)
+```
+`mutate_all` and `mutate_each` apply a function to every column when used with window functions, `funs()`. 
+```{r}
+iris_df %>% mutate_each(funs(min_rank)) #Ranks where ties get minimum rank
+iris_df %>% mutate_all(funs(lead)) #Values shifted by 1
+iris_df %>% mutate_all(funs(row_number)) #Ties to first value
+iris_df %>% mutate_all(funs(cume_dist))
+```
+You can add new columns using window functions and keep the original dataset or create a new one. 
+
+## Combining Data Sets
+This is probably one of my favorite features of dplyr. Combining data sets through a copy-paste mechanism in Excel can get messy very quickly when you have extremely large dataframes. Dplyr can do this through numerous `join` functions. 
+
+```{r new data load, include=FALSE}
+OTU <- read.csv("~/Desktop/McMahon-Lab/Lab-Data/North-Temp-Lakes-Obsv/North_Temperate_Lakes-Microbial_Observatory/Data/16S_data/bogs_OTUtable_07Jan15.csv")
+reclass <- read.csv("~/Desktop/McMahon-Lab/Lab-Data/North-Temp-Lakes-Obsv/North_Temperate_Lakes-Microbial_Observatory/Data/16S_data/bogs_reclassified_11Mar16.csv")
+OTU_df <- tbl_df(OTU)
+reclass_df <- tbl_df(reclass)
+```
+I have two csv files containing OTU information from the Bogs in Northern Wisconsin. The OTU dataframe contains each OTU along with the counts from numerous sampling dates. The reclass dataframe contains the OTU along with classification information, kingdom, phyla, class, etc. The `dplyr::join` function depends on the precense of an identical column in the 2 dataframes you want to join. If the identical column doesn't already exist between the two dataframes, you can create a new column with the `mutate` functions such as those shown above to append a new column. I've converted each dataframe to a tbl class so the display won't be the entire, very large dataframe. Checking out the two dataframes, you can tell which column will be used to join them together: 
+```{r}
+head(OTU_df, 20)
+head(reclass_df, 20)
+```
+From this, you can see that the similar columns are "OTU." However, the OTU counts dataframe wasn't given a column name, which shows up as "X." I could probably very easily fix this in Excel and then reload the dataframe, but you coudl also give the column a new name by:  
+```{r}
+colnames(OTU_df)[1] <- 'OTU'
+head(OTU_df, 20)
+```
+Now that the column names are the same for the OTU column, the two dataframes can be joined, and then write out the file:
+```{r}
+joined_OTU <- left_join(reclass_df, OTU_df, by = "OTU", copy=FALSE)
+joined_OTU
+write.csv(joined_OTU, "~/Desktop/OTU-samples-and-classifications-joined.csv")
+```
+To check that your dataframes merged correctly, look at the dimensions of the originals and the joined dataframe:
+```{r}
+dim(OTU_df)
+dim(reclass_df)
+dim(joined_OTU)
+```
+
+
+
