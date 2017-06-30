@@ -50,10 +50,12 @@ This sub-directory contains notes and code for R Study Group during Fall 2017 le
 
 ## References
 
-- [R for Data Science by Garrett Grolemund and Hadley Wickham](http://r4ds.had.co.nz/)
-- [Data wrangling, exploration, and analysis with R by Jenny Bryan](http://stat545.com/)
-- [Rmarkdown Gallery](http://rmarkdown.rstudio.com/gallery.html) & [Rmarkdown Articles](http://rmarkdown.rstudio.com/articles.html) | [Shiny Gallery](http://shiny.rstudio.com/gallery/) & [Shiny Articles](http://shiny.rstudio.com/articles/)
-- [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/)
-- [Data Carpentry: R for Ecologists](http://www.datacarpentry.org/R-ecology-lesson/) | [Karl Broman version](http://kbroman.org/datacarpentry_R_2017-01-10/)
+- [R for Data Science by Garrett Grolemund and Hadley Wickham (ebook)](http://r4ds.had.co.nz/)
+- [Data wrangling, exploration, and analysis with R by Jenny Bryan (course)](http://stat545.com/)
+- [Data Carpentry: R for Ecologists (workshop)](http://www.datacarpentry.org/R-ecology-lesson/) | [Karl Broman version](http://kbroman.org/datacarpentry_R_2017-01-10/)
+- Data Analysis for the Life Sciences by Rafa Irizarry and Michael Love ([edX series](https://www.edx.org/xseries/data-analysis-life-sciences) & [book](https://leanpub.com/dataanalysisforthelifesciences))
+- [Rmarkdown Gallery](http://rmarkdown.rstudio.com/gallery.html) & [Rmarkdown Articles](http://rmarkdown.rstudio.com/articles.html) 
+- [Shiny Gallery](http://shiny.rstudio.com/gallery/) & [Shiny Articles](http://shiny.rstudio.com/articles/)
+- [Advanced R by Hadley Wickham (ebook)](http://adv-r.had.co.nz/)
 - [Network Skills with R](http://www.stat.wisc.edu/network-skills)
 
