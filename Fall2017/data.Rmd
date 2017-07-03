@@ -24,21 +24,42 @@ The basic structure in `R` is a vector, here is a vector of the numbers 1 throug
 > ## Challenge
 >
 > Go through the Data Carpentry or Jenny Bryan introduction to learn more about data basics.
+> Read through Doub Bates notes to fill in further gaps.
 
-- [R Introdcution from Data Carpentry](http://kbroman.org/datacarpentry_R_2017-01-10/01-intro-to-R.html)
+- [R Introduction from Data Carpentry](http://kbroman.org/datacarpentry_R_2017-01-10/01-intro-to-R.html)
 - [R basics from Jenny Bryan](http://stat545.com/block002_hello-r-workspace-wd-project.html)
-- [R Introduction from Doug Bates](https://github.com/dmbates/stat692/blob/master/Intro.Rmd)
+- [Data frames, examining structure from Doug Bates](https://github.com/dmbates/stat692/blob/master/Data.Rmd)
 
 ## Data Wrangling
 
-It is often more useful to think of `R` as mostly operating on tables, which have many of the characteristics of spreadsheets. Tables, known in `R` as data frames, have observations, sometimes called individuals or cases, in rows and variables, or fields, in columns. The variables might be of different types, say numeric or character or logical. We might want to operate on the whole table, or on a row or column, or on some rectangular subset of the table.
+It is often more useful to think of `R` as mostly operating on rectangular tables, which have many of the characteristics of spreadsheets. Tables, known in `R` as data frames, have observations (individuals or cases) in rows and variables (fields) in columns. The variables might be of different types, say numeric or character or logical. We might want to operate on the whole table, or on a row or column, or on some rectangular subset of the table.
 
+The [tidyverse](http://tidyverse.org) provides a useful set of tools to organize work around tables. See the [tidyverse style guide](http://style.tidyverse.org/) for detail. See also the data pages from various sources:
+
+- [Introduction to the Tidyverse (nee Hadleyverse) (Doug Bates)](https://github.com/dmbates/stat692/blob/master/Hadleyverse.Rmd)
+- [Aggregating and analyzing data with dplyr (Data Carpentry)](http://kbroman.org/datacarpentry_R_2017-01-10/02-dplyr.html)
+- [Data analysis 1 (Jenny Bryan)](http://stat545.com/topics.html) (see links under this topic)
+
+Right here would like to go through an example using loops, then `apply` suite, then `dplyr` and `tidyr`, then `purrr`. The point would be that while the old way gets the job done, the newer tidyverse provides more compact ways of organizing the task that are more intuitive, once one overcomes the new way of thinking about the problem. 
+
+Here is the basic idea. It might seem best to go a row and column at a time and do operations, but if we can think about the whole object, the entire table, and what we want to do with it, then a more elegant solution might emerge.
 
 ### dplyr
+
+The `dplyr` package allows us to filter by rows and select columns, and to do tasks in groups organized by levels of columns. Further, these steps can be strung together using `pipes` as a coherent operation on a table, to create a new table. This new table may be stored, or might be used in another operation without ever being saved as a new object. See notes linked above.
+
+The latest release of `dplyr` (0.7.0) in its basic form appears unchanged. However, there is a new philosophy of "tidy evaluation" that will have a profound effect on how we use `dplyr` tools within functional programming. That is, the straightforward way to use `dplyr` is to reference table columns by name, which works great in an interactive setting. If the column names might change from table to table, and you want to create tools that leverage that, it will be important to learn about tidy evaluation.
+
+- [dplyr 0.7.0 release announcement](https://blog.rstudio.org/2017/06/13/dplyr-0-7-0/)
+- [tidy evaluation](http://rlang.tidyverse.org/articles/tidy-evaluation.html)
+- [RStudio Webinars](https://www.rstudio.com/resources/webinars/) (see What's new in dplyr 0.7.0?)
 
 ### tidyr
 
 ### purrr
+
+- [Iteration chapter of R for Data Science](http://r4ds.had.co.nz/iteration.html)
+- [Solving iteration problems using functional programming](https://www.rstudio.com/resources/videos/happy-r-users-purrr-tutorial/)
 
 ## Working with strings
 
@@ -234,5 +255,7 @@ v + c(1,2)
 
 will return 2, 4, 4, 6, 6, etc.
 
+See also
 
+- [Data analysis 2: vectors and files](http://stat545.com/topics.html) (scroll down to this topic)
 

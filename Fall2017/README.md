@@ -57,5 +57,6 @@ This sub-directory contains notes and code for R Study Group during Fall 2017 le
 - [Rmarkdown Gallery](http://rmarkdown.rstudio.com/gallery.html) & [Rmarkdown Articles](http://rmarkdown.rstudio.com/articles.html) 
 - [Shiny Gallery](http://shiny.rstudio.com/gallery/) & [Shiny Articles](http://shiny.rstudio.com/articles/)
 - [Advanced R by Hadley Wickham (ebook)](http://adv-r.had.co.nz/)
+- [RStudio Webinars](https://www.rstudio.com/resources/webinars/) | [Webinar GitHub](https://github.com/rstudio/webinars)
 - [Network Skills with R](http://www.stat.wisc.edu/network-skills)
 
