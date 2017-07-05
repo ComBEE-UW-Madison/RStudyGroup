@@ -12,7 +12,9 @@ folder | base name | details
  | overview | Overview of R Material
  | toc | Table of Contents (this document)
 Rbasics | data | Working with Data in R
+Rbasics | `R_apply` | examples using `for` and `apply`
 Rbasics | `R_intro_dplyr` | sub_lesson recasting data.frame examples
+Rbasics | `R_function` | examples of functions
 Rbasics | Rmarkdown | Rmarkdown Report Writing
 Rbasics | RmarkdownExample | Rmarkdown Example
 Rbasics | github | GitHub Version Control

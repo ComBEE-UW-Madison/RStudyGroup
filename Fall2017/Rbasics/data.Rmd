@@ -55,9 +55,24 @@ Right here would like to go through an example using `for/while/repeat`  loops, 
 
 Here is the basic idea. It might seem best to go a row and column at a time and do operations, but if we can think about the whole object, the entire table, and what we want to do with it, then a more elegant solution might emerge.
 
-### base apply
+### base R: `for` vs. `apply`
 
+- [apply examples](R_apply.Rmd)
 - [Apply and For Loops in R by Elizabeth McDaniel](http://rpubs.com/lizilla93/258391) ([Rmd source](https://github.com/lizilla1993/ComBEE-UW-Madison/blob/master/Spring2017/R/ComBEE-R-Apply-Session.Rmd))
+
+To answer the frequently asked question, 'How can I avoid this loop or make it faster?': Try to use simple vectorized operations; use the family of apply functions if appropriate; initialize objects to full length when using loops; and do not repeat calculations many times if performing them just once is sufficient. Measure execution time before making changes to code, and only make changes if the efficiency gain really matters. It is better to have readable code that is free of bugs than to waste hours optimizing code to gain a fraction of a second. Sometimes, in fact, a loop will provide a clear and efficient solution to a problem (considering both time and memory use). 
+(from <https://www.r-project.org/doc/Rnews/Rnews_2008-1.pdf>, p. 49)
+
+- [apply vs. for (Karl Broman)](https://kbroman.wordpress.com/2013/04/02/apply-vs-for/)
+- [Repeating things: looping and the apply family](http://nicercode.github.io/guides/repeating-things/)
+- [why to vectorize: using apply vs for](http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html)
+- [What you’re doing is rather desperate](https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/)
+- [Guess who wins apply vs for](http://www.r-bloggers.com/guess-who-wins-apply-versus-for-loops-in-r/ )
+
+- [Another comprehensive list of all the apply functions](http://seananderson.ca/courses/12-plyr/plyr_2012.pdf)
+- [apply for Dummies](http://www.dummies.com/how-to/content/how-to-use-the-apply-family-of-functions-in-r.html) (towards the bottom)
+
+- [Parallel apply (mclapply)](http://www.rforge.net/doc/packages/multicore/mclapply.html)
 
 ### plyr
 
@@ -92,14 +107,18 @@ Casillas](http://www.jvcasillas.com/tidyr_tutorial/)
 - [Tidy data article by Hadley Wickham](https://www.jstatsoft.org/article/view/v059i10)
 - [Data Import CheatSheet](https://www.rstudio.com/resources/cheatsheets/) (scroll down; )
 
-Note: There used to be one Data Wrangling CheatSheet for `dplyr` and `tidyr`. It has been replaced bhy the Data Transformation and Data Input CheatSheets.
+Note: There used to be one Data Wrangling CheatSheet for `dplyr` and `tidyr`. It has been replaced by the Data Transformation and Data Input CheatSheets.
+
+Some use the older [reshape2](https://github.com/hadley/reshape), which includes some column aggregations features that are not easily done in `tidyr`. See for instance:
+
+- [How to reshape data in R: tidyr vs reshape2](https://www.r-bloggers.com/how-to-reshape-data-in-r-tidyr-vs-reshape2/).
+- [An Introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)
 
 ### purrr
 
 - [purrr](http://purrr.tidyverse.org/) | [blog entry](https://blog.rstudio.org/2016/01/06/purrr-0-2-0/) | [bloggers entry](https://www.r-bloggers.com/using-purrr-with-dplyr/)
 - [Iteration chapter of R for Data Science](http://r4ds.had.co.nz/iteration.html)
 - [Solving iteration problems using functional programming](https://www.rstudio.com/resources/videos/happy-r-users-purrr-tutorial/)
-
 
 ## Reading and writing tables
 
