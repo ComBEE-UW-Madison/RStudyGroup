@@ -1,5 +1,5 @@
 ---
-title: "Getting to know R"
+title: "Overview of R Material"
 author: "Brian S. Yandell"
 date: "6/29/2017"
 output: html_document
@@ -8,6 +8,12 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+This course is a blend of introductory and advanced material using `R` for data science.
+It draws on material from [Data Carpentry](http://datacarpentry.org) and courses taught by a variety of people. Rather than try to repeat that material, links are made at various points.
+
+The intent is that this material could serve as the basis for a self-directed learning process. The material is all on GitHub at <https://github.com/ComBEE-UW-Madison/RStudyGroup> as part of the [ComBEE R Study Group at University of Wisconsin-Madison](https://sites.google.com/a/wisc.edu/combee/r-study-group).
+This set of material is being prepared by [Brian Yandell](http://www.stat.wisc.edu/~yandell) to be used for Fall 2017. It is built in part on the [Professional Skills for Data Science (Stat 627)](https://github.com/datascience-uwmadison/stat627) course taught by Yandell and [Douglas Bates](https://github.com/dmbates/stat692) in Fall 2014 and 2015, and on material developed by ComBEE members over the past few years.
 
 ## Setup
 
@@ -19,13 +25,11 @@ It would also be good to have [tidyverse](http://tidyverse.org) installed using 
 install.packages("tidyverse")
 ```
 
-## Some R history
-
-[R](https://www.r-project.org/) was developed in the late 1980s in New Zealand by [Ross Ihaka and Robert Gentleman](http://blog.revolutionanalytics.com/2012/06/the-influences-that-shaped-r-inferno-ish-r.html), known as `R & R`. It was built on LISP language ideas adopting the syntax of the `S` language, which was in turn created by John Chambers and colleagues at AT&T in the 1970s. While `S` was proprietary, limiting distribution, `R` has been freely available and open source since the beginning. Since the 1997, `R` has been maintained by a core development team of about 20 people. For more information, see <https://www.r-project.org/about.html>.
-
-Originally, `R` ran on a "dumb" terminal. There were many efforts to build a useful graphical user interface, or GUI. [RStudio](http://www.rstudio.com) was founded in 2008 with public release in 2011, and was quickly adopted by the `R` community. See <https://www.rstudio.com/about/>.
 
 ## Basics of RStudio
+
+[R](https://www.r-project.org/) originally ran on a "dumb" terminal. 
+There were many efforts to build a useful graphical user interface, or GUI. [RStudio](http://www.rstudio.com) was founded in 2008 with public release in 2011, and was quickly adopted by the `R` community. See <https://www.rstudio.com/about/>.
 
 `RStudio` has four panes to organize the page:
 

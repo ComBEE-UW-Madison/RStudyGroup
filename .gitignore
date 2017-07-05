@@ -4,3 +4,8 @@
 .Ruserdata
 *.Rproj
 *.html
+*.pdf
+*.sqlite
+Fall2017/data
+Fall2017/networks/Data files
+*.DS_Store

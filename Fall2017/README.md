@@ -46,7 +46,7 @@ This sub-directory contains notes and code for R Study Group during Fall 2017 le
 - data storage and management
     + [databases](https://db.rstudio.com/)
     + SQL, DBI, dbplyr
-    + feather, RDS
+    + feather, RDS, CSV, XLS
 
 ## References
 
@@ -54,9 +54,12 @@ This sub-directory contains notes and code for R Study Group during Fall 2017 le
 - [Data wrangling, exploration, and analysis with R by Jenny Bryan (course)](http://stat545.com/)
 - [Data Carpentry: R for Ecologists (workshop)](http://www.datacarpentry.org/R-ecology-lesson/) | [Karl Broman version](http://kbroman.org/datacarpentry_R_2017-01-10/)
 - Data Analysis for the Life Sciences by Rafa Irizarry and Michael Love ([edX series](https://www.edx.org/xseries/data-analysis-life-sciences) & [book](https://leanpub.com/dataanalysisforthelifesciences))
-- [Rmarkdown Gallery](http://rmarkdown.rstudio.com/gallery.html) & [Rmarkdown Articles](http://rmarkdown.rstudio.com/articles.html) 
 - [Shiny Gallery](http://shiny.rstudio.com/gallery/) & [Shiny Articles](http://shiny.rstudio.com/articles/)
 - [Advanced R by Hadley Wickham (ebook)](http://adv-r.had.co.nz/)
 - [RStudio Webinars](https://www.rstudio.com/resources/webinars/) | [Webinar GitHub](https://github.com/rstudio/webinars)
+- [RStudio Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- [Using R and RStudio at Amherst College](https://www.amherst.edu/people/facstaff/nhorton/node/567498)
+
+- [Yandell Data Club](https://github.com/byandell/data_club)
 - [Network Skills with R](http://www.stat.wisc.edu/network-skills)
 

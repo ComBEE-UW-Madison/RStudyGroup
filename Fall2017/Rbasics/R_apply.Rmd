@@ -1,0 +1,204 @@
+---
+title: "ComBEE-R-Apply-Session"
+author: "Elizabeth McDaniel"
+date: "3/13/2017"
+output: 
+  html_document:
+    toc: true
+    toc_float: true 
+    toc_depth: 2
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library("rmarkdown")
+```
+
+#Apply and For Loops in R
+
+Let's look at the R help guide on apply
+```{r}
+??apply
+```
+
+##Different types of Apply:
+- base::apply : Apply functions Over Array Margins
+- base::by : Apply a Function to a Data Frame Split by Factors
+- base::eapply : Apply a Function Over Values in an Environment
+- base::lapply : Apply a Function over a List or Vector
+- base::mapply : Apply a Function to Multiple List or Vector Arguments
+- base::rapply : Recrusively Apply a Function to a List
+- base::tapply : Apply a Function Over a Ragged Array 
+
+
+## Basic Apply
+
+Description: _"Returns a vector or array or list of values obtained by applying a function to margins of an array or matrix."_ The margins are either the rows (1), columns (2), or both (1:2). When referring to both, we apply the function to each individual value. Here is an example:
+
+```{r}
+#Create a matrix of 10 rows x 2 columns
+m <- matrix(c(1:10, 11:20), nrow = 10, ncol=2)
+m
+#Find the mean of the rows 
+apply(m, 1, mean)
+#Find the mean of the columns
+apply(m, 2, mean)
+#Divide all values in the matrix by 2
+apply(m, 1:2, function(x) x/2)
+
+```
+
+Here is an example from the help guide:
+```{r}
+#Compute row and column sums for a matrix:
+x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+x
+dimnames(x)[[1]] <- letters[1:8]
+apply(x, 2, mean, trim = .2)
+```
+
+I'm going to skip "by"" for now, because it involves splitting data, which I think is done easier with the dplyr package. But if you're curious about apply:by, visit [this blog post on Apply in R.]("https://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/") I have used quite a few examples in this R Markdown exercise from N. Saunder's blog post, along with some of my own examples from Vince Buffalo's [Bioinformatics Data Skills.]("http://shop.oreilly.com/product/0636920030157.do")
+
+
+Now that we know how apply basically works, let's look at more complicated versions of apply
+
+
+##lapply()
+Description: _"lapply returns a list of the same length as X, each element of which is the result of applying the function to the corresponding element of X."_
+
+Here is a simple example:
+```{r}
+#Create a list with 2 elements
+l <- list(a=1:10, b=11:20)
+l
+#Find the mean of values in each element
+lapply(l,mean)
+#Find the sum of the values in each element
+lapply(l,sum)
+```
+
+Here is an example for a list of numeric values:
+```{r}
+#list
+ll <- list(a=rnorm(6,mean=1), b=rnorm(6,mean=4), c=rnorm(6,mean=6))
+ll
+#Calculate the mean for each vector stored in the list
+  #First create the empty vector for means
+ll_means <- numeric(length(ll))
+  #Loop over list element and calc mean
+for (i in seq_along(ll)) { ll_means[i] <- mean(ll[[i]]) }
+ll_means
+  #Can use lapply much easier:
+lapply(ll,mean)
+#Ignoring NA values:
+  #First make the function
+meanRemoveNA <- function(x) mean(x, na.rm=TRUE)
+  #Apply to the list
+lapply(ll, meanRemoveNA)
+```
+
+##eapply()
+Description: _"eapply applies a function to the named values from an environment and returns the results as a list."_ This uses environments in R. An environment is a self-contained object with its own variables and functions. Lets use a simple example to define an environment and run eapply over it to find the mean of the variables: 
+```{r}
+#Create new environment
+e <- new.env()
+e
+#Create the environment variables
+e$a <- 1:10
+e$b <- 11:20
+#Find the mean of the variables
+eapply(e, mean)
+```
+
+Environments are often used by R packages such as [Bioconductor.]("https://www.bioconductor.org")
+
+##sapply()
+Description: _"sapply is a user friendly version of lapply by default returning a vector or matrix if appropriate."_ This means that if _lapply()_ returned a list with elements a and b, _sapply()_ will return either a vector or a matrix. 
+
+Let's use the simple list example to use sapply:
+```{r}
+#Create list with 2 elements
+l <- list(a=1:10, b=11:20)
+l
+#Find mean of values
+l.mean <- sapply(l, mean)
+#What type of object is returned?
+class(l.mean)
+#Numeric vector, so can get element a such as:
+l.mean[['a']]
+```
+
+
+##vapply()
+Description: _"vapply is similar to sapply, but it has a pre-specified type of return value."_ The third argument supplied to vapply is a sort of template settings for the output. The documentation for vapply uses _fivenum_ function as an example:
+```{r}
+l <- list(a=1:10, b=11:20)
+l
+#Fivenum of values using vapply
+l.fivenum <- vapply(l, fivenum, c(Min.=0, "1st Qu."=0, Median=0, "3rd Qu."=0, Max.=0))
+l.fivenum
+```
+
+_vapply_ returns a matrix, where the column names correspond to the original list element and the row names to the output template. 
+
+##mapply()
+Description: _"mapply is a multivariate version of sapply. mapply applies the function to the first elements of each argument."_
+
+Here is a simple example: 
+```{r}
+l1 <- list(a=c(1:10), b=c(11:20))
+l2 <- list(c=c(21:30), d=c(31:40))
+l1
+l2
+#Sum the corresponding elements of l1 and l2
+mapply(sum, l1$a, l1$b, l2$c, l2$d)
+```
+
+Here is an example of two genotypes and I want to see how many alleles are shared by calling intersect 
+```{r}
+ind_1 <- list(loci_1=c("T", "T"), loci_2=c("T", "G"), loci_3=c("C", "G"))
+ind_1
+ind_2 <- list(loci_1=c("A", "A"), loci_2=c("G", "G"), loci_3=c("C", "G"))
+ind_2
+mapply(function(a,b) length(intersect(a,b)), ind_1, ind_2)
+```
+
+##tapply()
+tapply is a nice apply function to start thinking about the dplyr package. Description: _"Apply a function to each cell of a raggd array, that is to each group of values given by a unique combination of the levels of certain factors."_ The usage is "tapply(X, INDEX, FUN ... simplify = TRUE)," where X is an object, usually a vector, and the index is a list of factors. 
+
+Let's use the iris data: 
+```{r}
+attach(iris)
+head(iris)
+#Find the mean petal length by species 
+tapply(iris$Petal.Length, Species, mean)
+```
+
+##Glancing at dplyr
+Next week we are discussing the [dplyr]("https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html") package. tapply resembles dplyr slightly. Let's look at some basic dplyr functions and what you can do with the iris data:
+```{r}
+library(dplyr)
+attach(iris)
+head(iris)
+```
+
+We see from head, the 5 columns are sepal length, seapl width, petal length, petal width, and species. Let's say for now we just want petal length, width, and species. We use select, and dplyr's pipes to make our lives easier. You can either type in the pipe symbol by hand "%>%," or on a Mac the shortcut is Cmd + Shft + M = %>%. Let's use dplyr pipes with the iris dataset to select certain columns:
+```{r}
+iris %>% select(Petal.Width, Petal.Length, Species) %>% head(10)
+```
+
+Now you have filtered out two columns you may or may not have wanted, without changing the raw data. I also piped through head so you wouldn't get the entire dataset. You can arrange by a certain column: 
+```{r}
+iris %>% arrange(Petal.Length) %>% head(10)
+```
+Here you are ascending by petal length. So how is tapply similar to dplyr? Using filter and the mean function to summarize petal length grouped by species. In the tapply function, we wanted to calculate the mean petal length grouped by species. Here is how we do it in dplyr:
+```{r}
+iris %>% group_by(Species) %>% summarize(mean_petal_length = mean(Petal.Length))
+```
+
+Page source: <https://github.com/lizilla1993/ComBEE-UW-Madison/tree/master/Spring2017>.

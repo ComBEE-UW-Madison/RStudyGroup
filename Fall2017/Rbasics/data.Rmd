@@ -30,6 +30,17 @@ The basic structure in `R` is a vector, here is a vector of the numbers 1 throug
 - [R basics from Jenny Bryan](http://stat545.com/block002_hello-r-workspace-wd-project.html)
 - [Data frames, examining structure from Doug Bates](https://github.com/dmbates/stat692/blob/master/Data.Rmd)
 
+## Side story on data wrangling
+
+Jenny Bryan expounds on data science.
+GapMinder was an early innovation in data exploration.
+The GapMinder data is used throughout Jenny Bryan's course,
+and can now be found as the [gapminder](https://cran.r-project.org/web/packages/gapminder/) `R` package.
+Hans Rosling, originator of GapMinder, has passed, but his tools and ideas persist.
+
+- [Jenny Bryan Deep Thoughts](https://www.slideshare.net/jenniferbryan5811/cm002-deep-thoughts)
+- <http://gapminder.org> | [GapMinder World](http://www.gapminder.org/world) | [GapMinderDev](https://www.gapminderdev.org/) | [Hans Rosling TED Talk](http://www.gapminder.org/videos/ted-us-state-department/)
+
 ## Data Wrangling
 
 It is often more useful to think of `R` as mostly operating on rectangular tables, which have many of the characteristics of spreadsheets. Tables, known in `R` as data frames, have observations (individuals or cases) in rows and variables (fields) in columns. The variables might be of different types, say numeric or character or logical. We might want to operate on the whole table, or on a row or column, or on some rectangular subset of the table.
@@ -40,13 +51,28 @@ The [tidyverse](http://tidyverse.org) provides a useful set of tools to organize
 - [Aggregating and analyzing data with dplyr (Data Carpentry)](http://kbroman.org/datacarpentry_R_2017-01-10/02-dplyr.html)
 - [Data analysis 1 (Jenny Bryan)](http://stat545.com/topics.html) (see links under this topic)
 
-Right here would like to go through an example using loops, then `apply` suite, then `dplyr` and `tidyr`, then `purrr`. The point would be that while the old way gets the job done, the newer tidyverse provides more compact ways of organizing the task that are more intuitive, once one overcomes the new way of thinking about the problem. 
+Right here would like to go through an example using `for/while/repeat`  loops, then base `apply` suite, then `dplyr` and `tidyr`, then `purrr`. The point would be that while the old way gets the job done, the newer tidyverse provides more compact ways of organizing the task that are more intuitive, once one overcomes the new way of thinking about the problem. 
 
 Here is the basic idea. It might seem best to go a row and column at a time and do operations, but if we can think about the whole object, the entire table, and what we want to do with it, then a more elegant solution might emerge.
 
+### base apply
+
+- [Apply and For Loops in R by Elizabeth McDaniel](http://rpubs.com/lizilla93/258391) ([Rmd source](https://github.com/lizilla1993/ComBEE-UW-Madison/blob/master/Spring2017/R/ComBEE-R-Apply-Session.Rmd))
+
+### plyr
+
+There is a package called [plyr](https://github.com/hadley/plyr), which seems to be retained for historical reasons and compatibility with other packages. Best to skip this package and go right to `dplyr`. These two packages have different syntax and approach problems somewhat differently.
+
+- [split-apply-combine strategy paper by Hadley Wickham](http://vita.had.co.nz/papers/plyr.html)
+
 ### dplyr
 
-The `dplyr` package allows us to filter by rows and select columns, and to do tasks in groups organized by levels of columns. Further, these steps can be strung together using `pipes` as a coherent operation on a table, to create a new table. This new table may be stored, or might be used in another operation without ever being saved as a new object. See notes linked above.
+The `dplyr` package allows us to filter by rows and select columns, and to do tasks in groups organized by levels of columns. Further, these steps can be strung together using `pipes` as a coherent operation on a table, to create a new table. This new table may be stored, or might be used in another operation without ever being saved as a new object. See notes linked above, and the following.
+
+- [Intro to R Adapted to dplyr](R_intro_dplyr.html)
+- [Data Wrangling in R by Elizabeth McDaniel](http://rpubs.com/lizilla93/data-wrangling-dplyr) ([Rmd source](https://github.com/lizilla1993/ComBEE-UW-Madison/blob/master/Spring2017/R/Data-Wrangling.Rmd))
+- [dplyr on tidyverse](http://dplyr.tidyverse.org/)
+- [Data Transformation with dplyr](https://www.rstudio.com/resources/cheatsheets/) (scroll down)
 
 The latest release of `dplyr` (0.7.0) in its basic form appears unchanged. However, there is a new philosophy of "tidy evaluation" that will have a profound effect on how we use `dplyr` tools within functional programming. That is, the straightforward way to use `dplyr` is to reference table columns by name, which works great in an interactive setting. If the column names might change from table to table, and you want to create tools that leverage that, it will be important to learn about tidy evaluation.
 
@@ -56,29 +82,24 @@ The latest release of `dplyr` (0.7.0) in its basic form appears unchanged. Howev
 
 ### tidyr
 
+The package [tidyr](http://tidyr.tidyverse.org/) is a companion to `dplyr`, with tools to rearrange tables. It is not covered in Data Carpentry.
+
+- [tidyr] | [blog intro](https://blog.rstudio.org/2014/07/22/introducing-tidyr/)
+- [tidyr tutorial by JV 
+Casillas](http://www.jvcasillas.com/tidyr_tutorial/)
+- [tidyr tutorial by U VA Library](http://data.library.virginia.edu/a-tidyr-tutorial/)
+- [Data Wrangling Rpubs by Bradley Boehmke](https://rpubs.com/bradleyboehmke/data_wrangling)
+- [Tidy data article by Hadley Wickham](https://www.jstatsoft.org/article/view/v059i10)
+- [Data Import CheatSheet](https://www.rstudio.com/resources/cheatsheets/) (scroll down; )
+
+Note: There used to be one Data Wrangling CheatSheet for `dplyr` and `tidyr`. It has been replaced bhy the Data Transformation and Data Input CheatSheets.
+
 ### purrr
 
+- [purrr](http://purrr.tidyverse.org/) | [blog entry](https://blog.rstudio.org/2016/01/06/purrr-0-2-0/) | [bloggers entry](https://www.r-bloggers.com/using-purrr-with-dplyr/)
 - [Iteration chapter of R for Data Science](http://r4ds.had.co.nz/iteration.html)
 - [Solving iteration problems using functional programming](https://www.rstudio.com/resources/videos/happy-r-users-purrr-tutorial/)
 
-## Working with strings
-
-Sometimes one may want to change names of columns in a table. Here is what might seem like a logical approach, but it is in fact difficult to read, awkward and repetitive, and slow.
-
-```
-new_names=list()
-l=1
-for(n in colnames(x)){
-      ifelse((l<10), (colnames(x)[l]=c(paste0('Otu000',c(l)))), (colnames(x)[l]=c(paste0('Otu00',c(l))))) 
-      new_names=append(new_names, colnames(x)[l])
-      l=l+1
-}
-```
-
-Here is an improved 
-```
-new_names <- paste0("Otu", stringr::str_pad(seq_along(colnames(x)), 4, pad="0"))
-```
 
 ## Reading and writing tables
 
@@ -86,9 +107,18 @@ new_names <- paste0("Otu", stringr::str_pad(seq_along(colnames(x)), 4, pad="0"))
 - write.csv and write::write_csv
 - readxl::read_excel
 
+## Prettying up tables
+
+- matrix vs data frame vs [tibble](http://tibble.tidyverse.org/)
+- [knitr figures and tables (Karl Broman)](http://kbroman.org/knitr_knutshell/pages/figs_tables.html) (kable, pander, xtable)
+- [printr](https://yihui.name/printr/) package
+
 ## Everything in R is a vector
 
-If you are new to programming, this subsection might be skipped. Experienced programmers who are new to `R` might find this useful. The basic argument: everything in R is a vector (no scalars!).
+If you are new to programming, this subsection might be skipped. Experienced programmers who are new to `R` might find this useful. The basic argument: everything in R is a vector (no scalars!). See also
+
+- [Data analysis 2: vectors and files](http://stat545.com/topics.html) (scroll down to this topic)
+
 
 Atomic vectors include integers, double-precision, strings (character), logical, raw and a few others. 
 
@@ -255,7 +285,28 @@ v + c(1,2)
 
 will return 2, 4, 4, 6, 6, etc.
 
-See also
 
-- [Data analysis 2: vectors and files](http://stat545.com/topics.html) (scroll down to this topic)
+## Working with strings
+
+Sometimes one may want to change names of columns in a table. Here is what might seem like a logical approach, but it is in fact difficult to read, awkward and repetitive, and slow.
+
+```
+new_names=list()
+l=1
+for(n in colnames(x)){
+      ifelse((l<10), (colnames(x)[l]=c(paste0('Otu000',c(l)))), (colnames(x)[l]=c(paste0('Otu00',c(l))))) 
+      new_names=append(new_names, colnames(x)[l])
+      l=l+1
+}
+```
+
+Here is an improved version:
+
+```
+new_names <- paste0("Otu", stringr::str_pad(seq_along(colnames(x)), 4, pad="0"))
+```
+
+It might be helpful to work up the full example, showing original code and improved version.
+
+- [Andrew Steinberger code](https://github.com/asteinberger9/seq_scripts)
 
