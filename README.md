@@ -9,11 +9,11 @@ Welcome to the ComBEE's R Study Group held at UW-Madison repo!
 This group of researchers meets bi-weekly to discuss coding in R.
 
 ## Join us!
-Sign up for our listserv by sending a blank email to [combee-rsg@lists.wisc.edu](mailto:combee-rsg@lists.wisc.edu).
+Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu).
 
 ## Upcoming events
 FALL 2017 Events will be scheduled in the weeks prior to the semester beginning.
-To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [combee-rsg@lists.wisc.edu](mailto:combee-rsg@lists.wisc.edu). 
+To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu). 
 
 
 ## Previous Semesters' Meetings
