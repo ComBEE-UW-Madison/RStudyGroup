@@ -13,6 +13,7 @@ Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc
 
 ## Upcoming events
 **For Fall 2017, R Study Group will meet every other week on Thursdays at 2 PM in Microbial Sciences Building 5503, starting September 28th.**
+
 To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu). 
 
 
