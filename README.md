@@ -22,7 +22,6 @@ To recieve updates about the coming semester meetings, sign up for our listserv 
 
 
 ## Previous Semesters' Meetings
-- [Fall 2017](https://github.com/datascience-uwmadison/R_for_data_sciences#r-for-teams-in-the-data-sciences)
 - [Prior to Summer 2017](https://github.com/ComBEE-UW-Madison/RStudyGroup/tree/master/Archive#r-study-group-archive)
 
 
