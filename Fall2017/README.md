@@ -10,4 +10,4 @@ where it can be used for multiple purposes. This folder will be used for the nav
 - October 26th: Organizing Data with databases and RMarkdown
 - November 2nd: Profiling Code for Errors and Simulations
 - November 23rd: THANKSGIVING - NO MEETING
-- December 7th: Connecting Data Beyond R
+- November 30th: Connecting Data Beyond R
