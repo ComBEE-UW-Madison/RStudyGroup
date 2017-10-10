@@ -5,13 +5,13 @@ where it can be used for multiple purposes. This folder will be used for the nav
 
 ## Fall 2017 Notes:
 
-[2018-09-28 Intro to R/Data Sciences](https://docs.google.com/document/d/1zHJukpoyYsqRDLLsk_h5vnMEXaLk-CxDMyqddyywPFM/edit?usp=sharing)
+[2018-09-28 Intro to R/Data Sciences](https://docs.google.com/document/d/1zHJukpoyYsqRDLLsk_h5vnMEXaLk-CxDMyqddyywPFM)
 
 ## Fall 2017 Schedule: 
 
-- September 28th: Curating Data Structures with tidyverse tools
-- October 12th: Visualize Data in R (ggplot2, cowplot, heatmaps, etc.)
-- October 26th: Organizing Data with databases and RMarkdown
-- November 2nd: Profiling Code for Errors and Simulations
-- November 23rd: THANKSGIVING - NO MEETING
-- November 30th: Connecting Data Beyond R
+- September 28th: Introduction to R and Rstudio
+- October 12th: Curating Data Structures with tidyverse tools
+- October 26th: Visualize Data in R (ggplot2, cowplot, heatmaps, etc.)
+- November 9th: Organizing Data with databases and RMarkdown
+- **November 21st**: Profiling Code for Errors and Simulations
+- December 5th: Connecting Data Beyond R
