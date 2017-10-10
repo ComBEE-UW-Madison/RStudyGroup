@@ -5,7 +5,8 @@ where it can be used for multiple purposes. This folder will be used for the nav
 
 ## Fall 2017 Notes:
 
-[2018-09-28 Intro to R/Data Sciences](https://docs.google.com/document/d/1zHJukpoyYsqRDLLsk_h5vnMEXaLk-CxDMyqddyywPFM)
+- [2018-09-28 Intro to R/Data Sciences](https://docs.google.com/document/d/1zHJukpoyYsqRDLLsk_h5vnMEXaLk-CxDMyqddyywPFM)
+- [2018-10-12 Curating Data Structures with tidyverse tools](https://docs.google.com/document/d/1ZyUQpZ1woSagacA9JQC_Y74sQPPmAGjdP7qRCYMMNbY)
 
 ## Fall 2017 Schedule: 
 
