@@ -13,5 +13,5 @@ where it can be used for multiple purposes. This folder will be used for the nav
 - October 12th: Curating Data Structures with tidyverse tools
 - October 26th: Visualize Data in R (ggplot2, cowplot, heatmaps, etc.)
 - November 9th: Organizing Data with databases and RMarkdown
-- **November 21st**: Profiling Code for Errors and Simulations
+- **November 21st**: Profiling Code for Errors and Simulations **[Tuesday!]**
 - December 5th: Connecting Data Beyond R
