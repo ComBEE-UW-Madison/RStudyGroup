@@ -10,11 +10,11 @@ where it can be used for multiple purposes. This folder will be used for the nav
 - [2017-10-12 Curating Data Structures with tidyverse tools](https://docs.google.com/document/d/1ZyUQpZ1woSagacA9JQC_Y74sQPPmAGjdP7qRCYMMNbY)
 - [2017-10-26 Split-Apply-Combine to ggplot2](https://docs.google.com/document/d/1lbAYi7-94W2iwMwTxs2FIV7k0vobGmaN7ORbVRcKAG8)
 
-## Fall 2017 Schedule: 
+## Fall 2017 Schedule:
 
 - September 28th: Introduction to R and Rstudio
 - October 12th: Curating Data Structures with tidyverse tools
 - October 26th: Visualize Data in R (ggplot2, cowplot, heatmaps, etc.)
 - November 9th: Organizing Data with databases and RMarkdown
 - **November 21st**: Profiling Code for Errors and Simulations **[Tuesday!]**
-- December 5th: Connecting Data Beyond R
+- December 7th: Connecting Data Beyond R
