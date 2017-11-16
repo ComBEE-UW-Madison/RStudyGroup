@@ -12,6 +12,7 @@ where it can be used for multiple purposes. This folder will be used for the nav
 - [2017-10-26 Split-Apply-Combine to ggplot2](https://docs.google.com/document/d/1lbAYi7-94W2iwMwTxs2FIV7k0vobGmaN7ORbVRcKAG8)
 [[R notes](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_10_26_notes.R)]
 - [2017-11-09 Organizing Data Tasks](https://docs.google.com/document/d/1uiQSDTaT0D7cXlj7u5UkgNDH3QlWC4rh7TzUV0d5EOY/edit) [[Rmd notes](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_11_09_notes.Rmd) | [R sourcefile](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_11_09_sourcefile.R)]
+- [2017-11-21 Profiling Code for Errors and Simulations](https://docs.google.com/document/d/1GwUmway7kQ51B4J4DYgzuwrZvylg6JVBQTGK9QlTPCE)
 
 ## Fall 2017 Schedule:
 
