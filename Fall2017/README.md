@@ -13,6 +13,7 @@ where it can be used for multiple purposes. This folder will be used for the nav
 [[R notes](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_10_26_notes.R)]
 - [2017-11-09 Organizing Data Tasks](https://docs.google.com/document/d/1uiQSDTaT0D7cXlj7u5UkgNDH3QlWC4rh7TzUV0d5EOY/edit) [[Rmd notes](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_11_09_notes.Rmd) | [R sourcefile](https://github.com/ComBEE-UW-Madison/RStudyGroup/blob/master/Fall2017/2017_11_09_sourcefile.R)]
 - [2017-11-21 Profiling Code for Errors and Simulations](https://docs.google.com/document/d/1GwUmway7kQ51B4J4DYgzuwrZvylg6JVBQTGK9QlTPCE)
+- [2017-12-10 Connecting Beyond R / Analyzing Data](https://docs.google.com/document/d/1isQgo1o8Gn4dUeO3h3-fDvAjn0sELKSuHxpku-hOoDg)
 
 ## Fall 2017 Schedule:
 
@@ -21,4 +22,4 @@ where it can be used for multiple purposes. This folder will be used for the nav
 - October 26th: Visualize Data in R (ggplot2, cowplot, heatmaps, etc.)
 - November 9th: Organizing Data Tasks with RMarkdown, functions and databases
 - **November 21st**: Profiling Code for Errors and Simulations **[Tuesday!]**
-- December 7th: Connecting Data Tools Beyond R
+- December 7th: Connecting Data Tools Beyond R / Analyzing Data
