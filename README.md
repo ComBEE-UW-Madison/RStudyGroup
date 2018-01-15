@@ -12,12 +12,7 @@ This group of researchers meets bi-weekly to discuss coding in R.
 Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu).
 
 ## Upcoming events
-**For Fall 2017, R Study Group will meet every other week on Thursdays at 2 PM in Microbial Sciences Building 5503, starting September 28th. See the schedule of topics [here](https://github.com/ComBEE-UW-Madison/RStudyGroup/tree/master/Fall2017)**
-
-[Fall 2017 Material](https://github.com/datascience-uwmadison/R_for_data_sciences#r-for-teams-in-the-data-sciences) | 
-[Fall 2017 Schedule & Notes](https://github.com/ComBEE-UW-Madison/RStudyGroup/tree/master/Fall2017)
-
-This semester, [Brian Yandell](https://www.stat.wisc.edu/~yandell/) of the Statistics and Horticulture departments will be leading R Study Group. He will be teaching his prepared materials for a course he is developing, R for Data Sciences. The materials for his planned course and topics for the semester can be found [here](https://github.com/datascience-uwmadison/R_for_data_sciences). 
+Stay tuned for Spring 2018 R Study Group!
 
 To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu). 
 
