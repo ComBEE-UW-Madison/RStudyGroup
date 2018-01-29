@@ -12,7 +12,7 @@ This group of researchers meets bi-weekly to discuss coding in R.
 Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu).
 
 ## Upcoming events
-Stay tuned for Spring 2018 R Study Group!
+R Study Group will be held on alternating Thursdays at 2 PM in MSB 5503 for the Spring 2018 semester starting February 1st.
 
 To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu). 
 
