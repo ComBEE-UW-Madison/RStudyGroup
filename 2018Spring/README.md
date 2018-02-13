@@ -4,7 +4,7 @@ This sub-directory contains notes and code for R Study Group Spring 2018.
 
 Links to notes: 
 
-[February 1st: Topics Discussion] (https://docs.google.com/document/d/1vP_G8VeMBEqHtFhjChxUF1WMSlumM-xEb-FtpLPQzYA/edit?usp=sharing)
+[February 1st: Topics Discussion](https://docs.google.com/document/d/1vP_G8VeMBEqHtFhjChxUF1WMSlumM-xEb-FtpLPQzYA/edit?usp=sharing)
 
 [February 15th: Data Structures in R] (https://docs.google.com/document/d/1wrWMabA-Izacc94n-oNn12qt4FY9tnDUknkKqyU-t_Q/edit?usp=sharing)
 
