@@ -19,6 +19,15 @@ library('pheatmap')
 
 ```
 
+```{r, engine='bash', eval = FALSE}
+
+## using git to pull down the Rstudygroup repo
+
+git clone https://github.com/ComBEE-UW-Madison/RStudyGroup.git
+
+```
+
+
 # Overview
 
 
@@ -64,14 +73,13 @@ glimpse(diamonds)
 ## Vector
 
 
-
-
 ```{r}
-
 
 ## we can make any of the columns a vector
 
-vector <- diamonds %>%
+## tidyverse
+
+vector <- diamonds %>% 
   .$color
 
 head(vector)
@@ -79,6 +87,7 @@ str(vector)
 length(vector)
 
 vector <- diamonds$color
+
 
 head(vector)
 str(vector)
@@ -90,12 +99,17 @@ head(vector)
 str(vector)
 length(vector)
 
+diamonds_df <- as.data.frame(diamonds)
+
+head(diamonds_df[, 'color'])
+
 ## how many of each value do we have?
 
-table(vector)
+typeof(table(vector))
 
 
 ## we can also create our own vectors
+
 
 my_vector <- c(1,2,2,3,4)
 
@@ -116,6 +130,10 @@ table(my_vector)
 
 list1 <- list(vector, vector)
 
+list1[[1]]
+
+?'['
+
 head(list1)
 str(list1)
 length(list1)
@@ -134,12 +152,16 @@ mat <- rnorm(200) %>%
          20, # number of rows we want in the matrix
          10)# number of columns we want in the matrix
 
+
+
 head(mat)
 str(mat)
 length(mat)
 nrow(mat)
 ncol(mat)
 
+
+head(mat*2)
 
 ```
 
@@ -162,8 +184,14 @@ test <- rnorm(200) %>%
          dimnames = d_names) # our previously defined names
 
 
+head(test)
+
 # Draw heatmaps
-pheatmap(test)
+pheatmap(test,
+         cellwidth = 7)
+
+?hclust
+
 
 
 ```
