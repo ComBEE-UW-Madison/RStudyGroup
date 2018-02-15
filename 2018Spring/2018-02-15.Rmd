@@ -1,0 +1,187 @@
+---
+title: "Data Structures in R"
+author: "Kirsten Gotting"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages('tidyverse')
+#install.packages('pheatmap')
+library('tidyverse')
+library('pheatmap')
+
+```
+
+# Overview
+
+
+From Advanced R:
+
+
+Homogeneous: all contents must be of the same type
+
+
+Heterogeneous: the contents can be of different types
+
+|    | Homogeneous   | Heterogeneous |
+|----|---------------|---------------|
+| 1d | Vector | List          |
+| 2d | Matrix        | Data frame    |
+| nd | Array         |               |
+
+
+# Types 
+
+
+## Data frame
+
+
+```{r}
+
+## this is a data frame
+head(diamonds)
+
+## we can find out more about the data frame
+
+str(diamonds)
+nrow(diamonds)
+ncol(diamonds)
+glimpse(diamonds)
+
+
+## what kinds of types do you see?
+
+
+```
+
+## Vector
+
+
+
+
+```{r}
+
+
+## we can make any of the columns a vector
+
+vector <- diamonds %>%
+  .$color
+
+head(vector)
+str(vector)
+length(vector)
+
+vector <- diamonds$color
+
+head(vector)
+str(vector)
+length(vector)
+
+vector <- diamonds[, 'color']
+
+head(vector)
+str(vector)
+length(vector)
+
+## how many of each value do we have?
+
+table(vector)
+
+
+## we can also create our own vectors
+
+my_vector <- c(1,2,2,3,4)
+
+head(my_vector)
+str(my_vector)
+length(my_vector)
+
+table(my_vector)
+
+
+```
+
+
+## List
+
+```{r}
+## we can also make that vector a list!
+
+list1 <- list(vector, vector)
+
+head(list1)
+str(list1)
+length(list1)
+
+```
+
+
+
+## Matrix
+
+
+```{r}
+
+mat <- rnorm(200) %>% 
+  matrix(., #this data
+         20, # number of rows we want in the matrix
+         10)# number of columns we want in the matrix
+
+head(mat)
+str(mat)
+length(mat)
+nrow(mat)
+ncol(mat)
+
+
+```
+
+
+## Bringing it together
+
+```{r}
+
+## modified from the ?pheatmap man page
+
+# Create test matrix
+
+d_names <- list(paste("Gene", 1:20, sep = ""),# row names
+                paste("Test", 1:10, sep = "")) # column names 
+
+test <- rnorm(200) %>% 
+  matrix(., #this data
+         20, # number of rows we want in the matrix
+         10, # number of columns we want in the matrix
+         dimnames = d_names) # our previously defined names
+
+
+# Draw heatmaps
+pheatmap(test)
+
+
+```
+
+
+
+# Continue Learning
+
+Tidyverse cheatsheets: 
+
+[Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
+
+[Data Transformation](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+
+[Data Visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+
+Going into detail:
+
+[Advanced R: Data Structures](http://adv-r.had.co.nz/Data-structures.html)
+
+[R for Data Science](http://r4ds.had.co.nz/index.html)
