@@ -1,0 +1,145 @@
+---
+title: 'Flow control: Looping and applying'
+author: "Kirsten Gotting"
+date: "2/28/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library('tidyverse')
+library('pheatmap')
+library('pvclust')
+library('RColorBrewer')
+library('parallel')
+
+```
+
+#Flow Control
+
+
+## For Loops
+
+```{r}
+glimpse(diamonds)
+
+
+```
+
+## If Else
+
+```{r}
+
+
+
+```
+
+## Apply
+
+```{r}
+
+```
+
+# Continuing from last time
+
+```{r}
+
+## modified from the ?pheatmap man page
+
+# Create test matrix
+
+d_names <- list(paste("Gene", 1:20, sep = ""),# row names
+                paste("Test", 1:10, sep = "")) # column names 
+
+test <- rnorm(200) %>% 
+  matrix(., #this data
+         20, # number of rows we want in the matrix
+         10, # number of columns we want in the matrix
+         dimnames = d_names) # our previously defined names
+
+# Draw heatmaps
+ 
+cluster_cols <- pvclust(data = test)
+
+plot(cluster_cols)
+
+cluster_rows <- pvclust(data = test)
+
+plot(cluster_rows)
+
+pheatmap(test, cluster_cols = cluster_cols$hclust,
+         cluster_rows = cluster_rows$hclust)
+
+
+hr              <- hclust(dist(test))
+num_clusters <- 5
+
+mycl            <- cutree(hr, k = num_clusters)
+cluster_letters <- LETTERS[seq(from = 1, to = num_clusters)]
+clusters        <- paste0("Cluster ", cluster_letters)
+
+mycols          <- clusters[as.vector(mycl)]
+names(mycols)   <- names(mycl)
+
+annotation           <- data.frame(Cluster=mycols)
+annotation$Cluster   <- as.factor(annotation$Cluster)
+colors               <- rainbow(num_clusters)
+names(colors)        <- clusters
+ann_cols             <- list(Cluster = colors)
+
+
+
+
+pheatmap(test, 
+         cluster_cols = FALSE, 
+         cluster_rows = hr, 
+         main = paste0('Clustering of ', nrow(test),' Genes'), 
+         border_color = NA, 
+         annotation_row = annotation, 
+         annotation_colors = ann_cols)
+
+
+
+
+```
+
+
+```{r}
+
+test_tidy <- test %>%
+  as.data.frame() %>%
+  mutate(Gene = rownames(test)) %>%
+  gather(Test, Abundance, -Gene)
+
+annotationDF <- data.frame(annotation, Gene = rownames(annotation)) %>%
+  left_join(test_tidy, ., by = "Gene")
+
+
+head(annotationDF)
+
+summaryDF <- annotationDF %>%
+  group_by(Test, Cluster) %>%
+  summarize(mean_abundance = mean(Abundance)) %>%
+  ungroup()
+
+ggplot(summaryDF, aes(y = mean_abundance, x = Test, group = Cluster, colour = Cluster)) +
+  geom_line() +
+  theme_minimal()
+
+
+ggplot(summaryDF, aes(y = mean_abundance, x = Test, group = 1)) +
+  geom_line() +
+  facet_grid(~Cluster) + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+```
+
+# Dive Deeper
+
+
+[Tidy Data Paper](http://vita.had.co.nz/papers/tidy-data.pdf)
+
+[What is the Tidyverse?](https://rviews.rstudio.com/2017/06/08/what-is-the-tidyverse/)
+
