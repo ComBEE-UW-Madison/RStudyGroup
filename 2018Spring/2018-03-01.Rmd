@@ -23,6 +23,19 @@ library('parallel')
 ```{r}
 glimpse(diamonds)
 
+unique_cuts <- unique(diamonds$cut)
+
+
+
+for (x in unique_cuts) {
+  #print(variable)
+  filter(diamonds, cut == x) %>% print(df)
+}
+
+for (x in seq(1, length(unique_cuts))) {
+  y <- unique_cuts[x]
+  filter(diamonds, cut == y) %>% print(df)
+}
 
 ```
 
@@ -30,6 +43,27 @@ glimpse(diamonds)
 
 ```{r}
 
+options(dplyr.width = Inf)
+
+
+x <- seq(as.Date("2000-02-29"), as.Date("2004-10-04"), by = "1 month")
+
+## has many "yyyy-mm-29", but a few "yyyy-03-01" in the non-leap years
+
+x <- seq(as.Date("2000-02-29"), as.Date("2004-10-04"), by = "1 month")
+## has many "yyyy-mm-29", but a few "yyyy-03-01" in the non-leap years
+y <- ifelse(as.POSIXlt(x)$mday == 29, x, NA)
+
+diamonds %>%
+  mutate(carat_mod = ifelse(
+    carat <= 1,
+    yes = ifelse(carat < 0.5,
+                 yes = carat + 0.2,
+                 no = carat - 0.2),
+    no = carat + 10 
+  )) %>%
+  select(carat, carat_mod) %>%
+  head()
 
 
 ```
@@ -37,6 +71,22 @@ glimpse(diamonds)
 ## Apply
 
 ```{r}
+
+
+for (x in unique_cuts) {
+  #print(variable)
+  filter(diamonds, cut == x) %>% print(df)
+}
+
+my_list <- lapply(unique_cuts, function(variable){
+  filter(diamonds, cut == variable)
+})
+
+my_list
+
+lapply(diamonds, class)
+
+?mclapply
 
 ```
 
@@ -71,23 +121,37 @@ pheatmap(test, cluster_cols = cluster_cols$hclust,
          cluster_rows = cluster_rows$hclust)
 
 
+
+
+
 hr              <- hclust(dist(test))
-num_clusters <- 5
+num_clusters    <- 5
 
 mycl            <- cutree(hr, k = num_clusters)
+mycl
+
 cluster_letters <- LETTERS[seq(from = 1, to = num_clusters)]
 clusters        <- paste0("Cluster ", cluster_letters)
 
 mycols          <- clusters[as.vector(mycl)]
+
+mycols
+
 names(mycols)   <- names(mycl)
+
+mycols
 
 annotation           <- data.frame(Cluster=mycols)
 annotation$Cluster   <- as.factor(annotation$Cluster)
+
+annotation
+
 colors               <- rainbow(num_clusters)
 names(colors)        <- clusters
 ann_cols             <- list(Cluster = colors)
 
 
+head(annotation)
 
 
 pheatmap(test, 
