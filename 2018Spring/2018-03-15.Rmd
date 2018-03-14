@@ -1,0 +1,195 @@
+---
+title: "Tidyverse Day"
+author: "Kirsten Gotting"
+date: "March 14, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tidyverse First
+
+```{r tidyverse}
+
+library('tidyverse')
+library('broom')
+
+## first make mtcars 'tidyer' 
+
+my_mtcars <- mtcars %>%
+  mutate(car = rownames(mtcars))
+
+head(my_mtcars)
+
+## select a subset of columns
+
+?select
+
+## use select to reorder your columns
+
+my_mtcars %>%
+  select(car, everything()) %>%
+  head(.)
+
+## use select to look at a subset of columns
+
+my_mtcars %>% 
+  select(mpg, cyl, disp) %>% 
+  head(.)
+
+## make a new column
+?mutate
+
+my_mtcars %>% 
+  select(mpg, cyl, disp) %>% 
+  mutate(mpg_cyl = mpg*cyl) %>%
+  head(.)
+
+## filter by values
+?filter
+
+my_mtcars %>% 
+  select(mpg, cyl, disp) %>% 
+  mutate(mpg_cyl = mpg*cyl) %>%
+  filter(disp <= 108) %>%
+  head(.)
+
+## make summary values
+?summarise
+
+my_mtcars %>% 
+  select(mpg, cyl, disp) %>% 
+  mutate(mpg_cyl = mpg*cyl) %>%
+  summarize(mean(mpg), mean(disp))
+
+## apply an operation by a grouping variable
+?group_by
+
+my_mtcars %>% 
+  select(mpg, cyl, disp) %>% 
+  mutate(mpg_cyl = mpg*cyl) %>%
+  group_by(cyl) %>%
+  summarize(mean(mpg), mean(disp))
+
+  
+## join in a external table
+
+?left_join
+
+## create a fake table to join in 
+
+my_car_table <- data.frame(car = rownames(mtcars),
+                           color = rainbow(nrow(mtcars)),
+                           stringsAsFactors = FALSE
+)
+
+head(my_car_table)
+
+my_mtcars %>%
+  left_join(., my_car_table, by = 'car') %>%
+  head()
+
+## apply an operation
+?do
+
+my_mtcars %>%
+  left_join(., my_car_table, by = 'car') %>%
+  group_by(cyl) %>%
+  do(tidy(lm( mpg ~ disp, data = .))) ## ?tidy is from the broom package
+
+
+
+## plotting 
+
+my_mtcars %>%
+  ggplot(aes(x = mpg, y = disp)) +
+  geom_point()
+
+
+
+```
+
+Notice how tidyverse packages all return the same type of object, a data frame. I have found this to be very useful because it minimizes cross referencing to external variables when all of your manipulations are within one data object. 
+
+# Base Legacy
+
+```{r base}
+
+## first restart the R session so I don't cheat with tidyverse tools on accident
+#.rs.restartR() # comment out the command that can't be knit
+
+
+
+?mtcars
+mtcars
+
+## select a subset of columns
+head(mtcars[, c('cyl', 'mpg', 'disp')])
+
+## make a new column
+mtcars$mpg_cyl <- mtcars$mpg*mtcars$cyl
+
+## filter by values
+
+
+mtcars[which(mtcars$disp <= 108), ]
+
+
+## make summary values
+?summarise
+
+summary(mtcars)
+
+mean(mtcars$mpg)
+mean(mtcars$disp)
+
+## apply an operation by a grouping variable
+?group_by
+
+my_split <- split(mtcars, factor(mtcars$cyl))
+
+lapply(my_split, summary)
+
+
+  
+## join in a external table
+
+?left_join
+
+## create a fake table to join in 
+
+my_car_table <- data.frame(row.names = rownames(mtcars),
+                           color = rainbow(nrow(mtcars)),
+                           stringsAsFactors = FALSE
+)
+
+
+head(cbind(mtcars, my_car_table)) # blind bind
+
+head(cbind(mtcars, my_car_table[rownames(mtcars), ])) # better bind with preserved row identity
+
+## cbind fails if the tables have different numbers of rows! 
+
+head(merge(mtcars, my_car_table))
+
+
+
+## apply an operation
+?do
+
+
+
+lm(mpg ~ disp, data = mtcars)
+
+lapply(my_split, function(x) lm(mpg ~ cyl, data = x))
+
+
+## plotting 
+
+plot(y = mtcars$disp, x = mtcars$mpg)
+
+
+
+```
