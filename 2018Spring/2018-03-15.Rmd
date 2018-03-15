@@ -18,10 +18,12 @@ library('broom')
 
 ## first make mtcars 'tidyer' 
 
+View(mtcars)
+
 my_mtcars <- mtcars %>%
   mutate(car = rownames(mtcars))
 
-head(my_mtcars)
+View(my_mtcars)
 
 ## select a subset of columns
 
@@ -31,12 +33,12 @@ head(my_mtcars)
 
 my_mtcars %>%
   select(car, everything()) %>%
-  head(.)
+  View(.)
 
 ## use select to look at a subset of columns
 
 my_mtcars %>% 
-  select(mpg, cyl, disp) %>% 
+  select(mpg, cyl, disp, contains('car')) %>% 
   head(.)
 
 ## make a new column
@@ -53,8 +55,29 @@ my_mtcars %>%
 my_mtcars %>% 
   select(mpg, cyl, disp) %>% 
   mutate(mpg_cyl = mpg*cyl) %>%
-  filter(disp <= 108) %>%
-  head(.)
+  filter(disp <= 108 | mpg > 30)
+
+## Tests you can filter with
+# "==" is equal to (not assigning variables)
+# "<=" less than or equals
+# ">=" greater than or equals
+# 
+# "<" ">" 
+# 
+# "|" OR
+# 
+# "&"
+# 
+# "!="
+# 
+# "!is.na()"
+# near 1.1 near 1 TRUE
+
+my_mtcars %>% 
+  mutate(my_na_test = ifelse(mpg < 30, yes = NA, no = mpg)) %>%
+  filter(!is.na(my_na_test))
+
+
 
 ## make summary values
 ?summarise
@@ -67,12 +90,21 @@ my_mtcars %>%
 ## apply an operation by a grouping variable
 ?group_by
 
+
+View(mtcars)
+
 my_mtcars %>% 
   select(mpg, cyl, disp) %>% 
   mutate(mpg_cyl = mpg*cyl) %>%
   group_by(cyl) %>%
-  summarize(mean(mpg), mean(disp))
+  summarize(mean_mpg = mean(mpg), 
+            mean_disp = mean(disp))
 
+
+my_mtcars %>% 
+  group_by(cyl, vs) %>%
+  summarize(mean_mpg = mean(mpg), 
+            mean_disp = mean(disp))
   
 ## join in a external table
 
@@ -88,8 +120,9 @@ my_car_table <- data.frame(car = rownames(mtcars),
 head(my_car_table)
 
 my_mtcars %>%
-  left_join(., my_car_table, by = 'car') %>%
-  head()
+  head() %>%
+  left_join(., my_car_table, by = 'car')
+
 
 ## apply an operation
 ?do
@@ -107,7 +140,15 @@ my_mtcars %>%
   ggplot(aes(x = mpg, y = disp)) +
   geom_point()
 
+my_mtcars %>%
+  ggplot(aes(x = mpg, y = disp, color = gear)) +
+  geom_point() +
+  theme_bw() +
+  labs(title = 'My title', 
+       caption = 'My cap',
+       subtitle = 'sub')
 
+?source
 
 ```
 
@@ -134,7 +175,7 @@ mtcars$mpg_cyl <- mtcars$mpg*mtcars$cyl
 ## filter by values
 
 
-mtcars[which(mtcars$disp <= 108), ]
+mtcars[mtcars$disp <= 108, ]
 
 
 ## make summary values
