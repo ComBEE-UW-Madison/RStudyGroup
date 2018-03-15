@@ -23,7 +23,7 @@ Spring 2018 Schedule: (notes found [here](https://github.com/ComBEE-UW-Madison/R
 
 [March 1st: For loops, apply, flow control](https://docs.google.com/document/d/1t-J8WB-rUa9DAzpWgOKLXVvH1_xs9iq1qUNAlPiHq2Q/edit?usp=sharing)
 
-[March 29th: Tidyverse](https://docs.google.com/document/d/1BydkmTd1PMEvcO4TkXyKc2F3in6rSoWygYNA7coW4o4/edit?usp=sharing)
+[March 15th: Tidyverse](https://docs.google.com/document/d/1BydkmTd1PMEvcO4TkXyKc2F3in6rSoWygYNA7coW4o4/edit?usp=sharing)
 
 [April 12th: Introduction to Bioconductor](https://docs.google.com/document/d/1lDxsdr9FG_E5o-yWsNc6gKrSZEm-xpQ3E5m-5BoMRAs/edit?usp=sharing)
 
