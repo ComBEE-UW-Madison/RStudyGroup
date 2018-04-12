@@ -11,12 +11,19 @@ output: html_document
 "Bioconductor documentation comes at three levels: workflows ... package vignettes ...  and function manual pages. In many cases, users ultimately become developers, making their own algorithms and approaches available to others." (1)
 
 Key Packages:
+
 IRanges
+
 GenomicRanges
+
 GenomicAlignments
+
 GenomicFeatures
+
 VariantAnnotation
+
 rtracklayer
+
 AnnotationHub
 
 ```{r, include=FALSE}
@@ -145,4 +152,5 @@ Link: https://www.nature.com/articles/nmeth.3252
 
 # Relevant Vignettes
 [Counting reads with summarizeOverlaps](https://bioconductor.org/packages/release/bioc/vignettes/GenomicAlignments/inst/doc/summarizeOverlaps.pdf)
+
 [Overlap Encodings](https://www.bioconductor.org/packages/release/bioc/vignettes/GenomicAlignments/inst/doc/OverlapEncodings.pdf)
