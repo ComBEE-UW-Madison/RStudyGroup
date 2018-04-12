@@ -29,7 +29,7 @@ AnnotationHub
 ```{r, include=FALSE}
 
 #source("https://bioconductor.org/biocLite.R")
-#packages <- c("IRanges", "GenomicRanges", "GenomicAlignments", "GenomicFeatures", "VariantAnnotation", "rtracklayer", "AnnotationHub")
+packages <- c("IRanges", "GenomicRanges", "GenomicAlignments", "GenomicFeatures", "VariantAnnotation", "rtracklayer", "AnnotationHub")
 
 #biocLite(pkgs=packages)
 
@@ -66,7 +66,7 @@ countOverlaps(query = gr, subject = gr1)
 
 
 ## subsetByOverlaps returns the subset of x that has an overlap hit with a range in ranges using the specified findOverlaps parameters
-subsetByOverlaps(x = gr, ranges = gr1)
+subsetByOverlaps(gr, gr1)
 
 
 gff_file <- system.file("extdata", "GFF3_files", "a.gff3", package="GenomicFeatures")
