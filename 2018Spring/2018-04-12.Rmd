@@ -29,7 +29,13 @@ AnnotationHub
 ```{r, include=FALSE}
 
 #source("https://bioconductor.org/biocLite.R")
-packages <- c("IRanges", "GenomicRanges", "GenomicAlignments", "GenomicFeatures", "VariantAnnotation", "rtracklayer", "AnnotationHub")
+packages <- c("IRanges", 
+              "GenomicRanges", 
+              "GenomicAlignments", 
+              "GenomicFeatures", 
+              "VariantAnnotation", 
+              "rtracklayer", 
+              "AnnotationHub")
 
 #biocLite(pkgs=packages)
 
@@ -84,12 +90,14 @@ exons
 # SummarizedExperiment
 
 ```{r}
+
 nrows <- 200
 ncols <- 6
 
 ## create a matrix of fake counts
 counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
 head(counts) ## columns are samples, rows are genes
+
 
 ## create a fake annotation object (ie import.gff3)
 rowRanges <- GRanges(rep(c("chr1", "chr2"), c(50, 150)),
@@ -105,12 +113,12 @@ colData <- DataFrame(Treatment=rep(c("ChIP", "Input"), 3),
                      row.names=LETTERS[1:6])
 
 rse <- SummarizedExperiment(assays=SimpleList(counts=counts),
-                            rowRanges=rowRanges, colData=colData)
+                            rowRanges=rowRanges, 
+                            colData=colData)
 
 head(assay(rse))
 
 colData(rse)
-
 rowData(rse)
 
 ```
@@ -118,10 +126,13 @@ rowData(rse)
 # AnnotationHub
 
 ```{r}
+
+
 ah <- AnnotationHub()
 ah
 
 unique(ah$dataprovider)
+
 unique(ah$rdataclass)
 
 orgs <- subset(ah, ah$rdataclass == "OrgDb")
@@ -132,9 +143,6 @@ dog <- query(orgs, "Canis familiaris")[[1]]
 
 columns(dog)
 
-
-
-
 all_keys <- keys(dog, keytype="ACCNUM")
 
 
@@ -142,6 +150,16 @@ select(dog,
        keys=head(all_keys), 
        columns=c('SYMBOL', 'ALIAS', 'UNIPROT', 'GENENAME', 'PMID'), 
        keytype="ACCNUM")
+
+
+
+ranges <- subset(ah, ah$rdataclass == "GRanges")
+ranges
+
+
+dog <- query(ranges, "Canis familiaris")[[1]]
+
+
 
 ```
 
