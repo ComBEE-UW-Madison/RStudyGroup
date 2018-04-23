@@ -1,0 +1,196 @@
+---
+title: "Bioconductor Part 2"
+author: "Kirsten Gotting"
+date: "April 23, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
+```
+
+"Bioconductor provides core data structures and methods that enable genome-scale analysis of high-throughput data in the context of the rich statistical programming environment offered by the R project2."(1)
+
+# Read QA/QC
+
+FASTQC
+
+Trim reads for adapters/primers
+
+Filter low quality reads
+
+Filter contaminant
+
+Align the reads to a genome/transcriptome/references
+
+-kallisto, Tophat, Bowtie, mothur, QIIME  
+
+# RNA-seq
+
+Count reads aligning to genes/exons
+-HTSeq, R
+
+Look for differentially expressed genes/exons
+-edgeR, DESeq2, DEXSeq
+
+
+```{r, include = FALSE}
+library("DESeq2")
+library("pasilla")
+library('tidyverse')
+```
+
+```{r}
+
+## MOSTLY FROM THE DESEQ@ MANUAL ##
+
+
+
+pasCts <- system.file("extdata",
+                      "pasilla_gene_counts.tsv",
+                      package="pasilla", mustWork=TRUE)
+
+pasAnno <- system.file("extdata",
+                       "pasilla_sample_annotation.csv",
+                       package="pasilla", mustWork=TRUE)
+
+
+## read in the counts data
+cts     <- read.csv(pasCts,sep="\t",row.names="gene_id") %>% as.matrix()
+
+
+## read in the column data/experimental information
+coldata <- read.csv(pasAnno, row.names=1)
+
+coldata <- coldata[,c("condition","type")]
+coldata$type <- sub("-", "", coldata$type)
+
+## ----showPasilla---------------------------------------------------------
+head(cts,2)
+coldata
+
+## ----reorderPasila-------------------------------------------------------
+
+rownames(coldata) <- sub("fb", "", rownames(coldata))
+
+all(rownames(coldata) %in% colnames(cts))
+all(rownames(coldata) == colnames(cts))
+cts <- cts[, rownames(coldata)]
+all(rownames(coldata) == colnames(cts))
+
+
+
+## ----runDESEQ analysis ------------------------
+
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                               colData = coldata,
+                               design= ~condition)
+
+## did my experiment fail?
+rld <- rlog(dds)
+
+plotPCA(rld) + theme_bw()
+
+
+dds <- DESeq(dds)
+
+
+res <- results(dds)
+
+resultsNames(dds)
+
+head(res)
+
+
+plotMA(res)
+
+
+## volcano plots, look for the 'ears'
+
+
+results <- data.frame(res) %>%
+  mutate(significance_group = ifelse(padj <= 1e-6, yes = TRUE, no = FALSE))
+
+
+ggplot(results, aes(x = log2FoldChange, y = -log(padj, base = c(10)), 
+               group = significance_group, colour = significance_group)) +
+  geom_point() +
+  ggtitle('Volcano plot') +
+  xlab("M = log2(Fold Change)") + 
+  ylab("-log10(Adjusted P-Value)") + 
+  ylim(0, 100) +
+  scale_color_manual(values = c("gray24", "red")) +
+  theme_bw()
+
+
+```
+
+# Chip-seq
+
+Call peaks along the genome
+
+Global Changes:
+Metaplots to show changes in binding affinity/methylation/acetylation
+
+
+Local Changes:
+Look for differentially abundant peaks
+
+
+
+# Microarrays
+
+Targeted genes are already known, read out is intensities
+
+Look for changes in intensity across conditions (dual channel microarray)
+
+Look for expression of target genes (single channel microarray)
+
+-Limma
+
+
+# Microbiome
+
+Look for representation and diversity of genera/OTUs
+-Phyloseq
+
+```{r, include = FALSE}
+library("phyloseq")
+
+```
+
+```{r}
+
+## FROM THE PHYLOSEQ MANUAL ##
+
+# Create a pretend OTU table that you read from a file, called otumat
+otumat = matrix(sample(1:100, 100, replace = TRUE), nrow = 10, ncol = 10)
+otumat
+
+rownames(otumat) <- paste0("OTU", 1:nrow(otumat))
+colnames(otumat) <- paste0("Sample", 1:ncol(otumat))
+otumat
+
+taxmat = matrix(sample(letters, 70, replace = TRUE), nrow = nrow(otumat), ncol = 7)
+rownames(taxmat) <- rownames(otumat)
+colnames(taxmat) <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+taxmat
+
+
+OTU = otu_table(otumat, taxa_are_rows = TRUE)
+TAX = tax_table(taxmat)
+OTU
+
+physeq = phyloseq(OTU, TAX)
+physeq
+
+plot_bar(physeq, fill = "Family") + theme_bw() + labs(title = 'Excellent taxa barplot')
+
+```
+
+
+
+# References
+1. Huber, W., Carey, V. J., Gentleman, R., Anders, S., Carlson, M., Carvalho, B. S., ... & Gottardo, R. (2015). Orchestrating high-throughput genomic analysis with Bioconductor. Nature methods, 12(2), 115.
+Link: https://www.nature.com/articles/nmeth.3252
+
