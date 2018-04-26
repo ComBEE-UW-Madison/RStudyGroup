@@ -9,11 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, warnings = FALSE, message = FALSE)
 ```
 
-"Bioconductor provides core data structures and methods that enable genome-scale analysis of high-throughput data in the context of the rich statistical programming environment offered by the R project2."(1)
+"Bioconductor provides core data structures and methods that enable genome-scale analysis of high-throughput data in the context of the rich statistical programming environment offered by the R project."(1)
 
 # Read QA/QC
 
-FASTQC
+FASTQC: Phred score around 30 is good!
 
 Trim reads for adapters/primers
 
@@ -30,6 +30,7 @@ Align the reads to a genome/transcriptome/references
 Count reads aligning to genes/exons
 -HTSeq, R
 
+
 Look for differentially expressed genes/exons
 -edgeR, DESeq2, DEXSeq
 
@@ -38,11 +39,12 @@ Look for differentially expressed genes/exons
 library("DESeq2")
 library("pasilla")
 library('tidyverse')
+
 ```
 
 ```{r}
 
-## MOSTLY FROM THE DESEQ@ MANUAL ##
+## MOSTLY FROM THE DESEQ2 MANUAL ##
 
 
 
@@ -56,13 +58,14 @@ pasAnno <- system.file("extdata",
 
 
 ## read in the counts data
-cts     <- read.csv(pasCts,sep="\t",row.names="gene_id") %>% as.matrix()
+cts     <- read.csv(pasCts, sep="\t",row.names="gene_id") %>% 
+  as.matrix()
 
 
 ## read in the column data/experimental information
-coldata <- read.csv(pasAnno, row.names=1)
+coldata      <- read.csv(pasAnno, row.names=1)
+coldata      <- coldata[,c("condition","type")]
 
-coldata <- coldata[,c("condition","type")]
 coldata$type <- sub("-", "", coldata$type)
 
 ## ----showPasilla---------------------------------------------------------
@@ -75,7 +78,9 @@ rownames(coldata) <- sub("fb", "", rownames(coldata))
 
 all(rownames(coldata) %in% colnames(cts))
 all(rownames(coldata) == colnames(cts))
+
 cts <- cts[, rownames(coldata)]
+
 all(rownames(coldata) == colnames(cts))
 
 
@@ -88,6 +93,7 @@ dds <- DESeqDataSetFromMatrix(countData = cts,
 
 ## did my experiment fail?
 rld <- rlog(dds)
+
 
 plotPCA(rld) + theme_bw()
 
@@ -107,7 +113,6 @@ plotMA(res)
 
 ## volcano plots, look for the 'ears'
 
-
 results <- data.frame(res) %>%
   mutate(significance_group = ifelse(padj <= 1e-6, yes = TRUE, no = FALSE))
 
@@ -122,12 +127,12 @@ ggplot(results, aes(x = log2FoldChange, y = -log(padj, base = c(10)),
   scale_color_manual(values = c("gray24", "red")) +
   theme_bw()
 
-
 ```
 
 # Chip-seq
 
 Call peaks along the genome
+-MACs to call peaks
 
 Global Changes:
 Metaplots to show changes in binding affinity/methylation/acetylation
@@ -135,7 +140,6 @@ Metaplots to show changes in binding affinity/methylation/acetylation
 
 Local Changes:
 Look for differentially abundant peaks
-
 
 
 # Microarrays
@@ -155,6 +159,7 @@ Look for representation and diversity of genera/OTUs
 -Phyloseq
 
 ```{r, include = FALSE}
+
 library("phyloseq")
 
 ```
@@ -176,7 +181,7 @@ rownames(taxmat) <- rownames(otumat)
 colnames(taxmat) <- c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")
 taxmat
 
-
+## creating the 'phyloseq object'
 OTU = otu_table(otumat, taxa_are_rows = TRUE)
 TAX = tax_table(taxmat)
 OTU
@@ -184,7 +189,9 @@ OTU
 physeq = phyloseq(OTU, TAX)
 physeq
 
-plot_bar(physeq, fill = "Family") + theme_bw() + labs(title = 'Excellent taxa barplot')
+plot_bar(physeq, fill = "Family") + 
+  theme_bw() + 
+  labs(title = 'Excellent taxa barplot')
 
 ```
 
