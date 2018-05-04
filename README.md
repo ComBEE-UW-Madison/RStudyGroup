@@ -33,6 +33,9 @@ To recieve updates about the coming semester meetings, sign up for our listserv 
 
 
 ## Previous Semesters' Meetings
+
+Special thanks to the [past leaders of R study group](Archive/Past_Leaders.md)!
+
 - [Prior to Summer 2017](https://github.com/ComBEE-UW-Madison/RStudyGroup/tree/master/Archive#r-study-group-archive)
 
 
