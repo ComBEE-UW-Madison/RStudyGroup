@@ -148,23 +148,85 @@ Make a list, `l_2`, from some combination types (_e.g._, numbers and characters)
 W.R.T. bullet (1) above, how are different types combined into a list vs. a vector?
 
 ##Matricies
-Matricies are simple, 2-dimensional data strucutres.
+Matricies are simple, 2-dimensional data strucutres. 
+R has lots of useful matrix functionality.
+We probably won't use them too much.
+\vspace{12pt}
 
+```{r}
+#a simple square matrix
+m_1<-matrix(c(10, 9, 8,
+              7, 6, 5,
+              4, 3, 1), byrow = TRUE, nrow = 3)
+m_1
+```
 
-  
+The logic for subsetting matricies is similar two before, but with 2 dimensions `[ROW,COL]` .
+
+To subset the entry in the 2nd row and 1st column, type
+
+```{r}
+m_1[2,1]
+```
+
+How might you subset an entire row or column?
+\vspace{12pt}
 ##Dataframes
 Dataframes are a super nifty data structure for data analysis.
   + 2-dimensional
   + Columns as variables
   + Rows as observations
   
+```{r}
+#a simple dataframe
+df_1<-data.frame('row_1' = c(1, 2, 3, 4, 5), 'row_2' = c(FALSE, TRUE, TRUE, FALSE, TRUE), 'row_3' = c(10.7, 23.8, 98.7, 23.5, 99.7))
+df_1
+```
 
+They can be indexed in a manner similar to matricies.
 
+```{r}
+df_1[2,3]
+```
 
+Alternatively, rows can be pulled out using `$`.
 
-By subsetting and using the typeof() function, determine which two other data strucutres dataframes are constructed from. 
+```{r}
+df_1$row_2
+```
 
+Let's have a look at the `iris` dataframe.
 
+```{r}
+#look at first few rows
+head(iris)
+
+#examine the structure
+str(iris)
+```
+
+By subsetting with `$` and using the `typeof()` function, determine which two other data strucutres dataframes are constructed from. 
+
+The `mean()` and `sd()` functions compute the mean and standard deviation of a vector of numbers.
+
+Using these functions, describe the iris dataset.
+\vspace{24pt}
+
+##Things to look forward to.
+
+When properly organized into a dataframe, dataset can be very easy to summarize.
+```{r}
+boxplot(iris$Sepal.Length ~ iris$Species)
+```
+\vspace{24pt}
+
+Data frames are also easy to manipulate in ways that are productive for data analysis.
+```{r}
+#subset to look only at setosa and versicolor
+iris_sub<-subset(iris, Species == 'setosa' | Species == 'versicolor')
+boxplot(iris_sub$Sepal.Length ~ iris_sub$Species)
+t.test(iris$Sepal.Length[iris$Species == 'setosa'], iris$Sepal.Length[iris$Species == 'versicolor'])
+```
 
 
 
