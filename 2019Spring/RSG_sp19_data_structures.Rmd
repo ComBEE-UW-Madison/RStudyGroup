@@ -1,0 +1,148 @@
+---
+title: 'ComBEE RSG: Data Structures'
+author: "M. Kartje"
+date: "February 21, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Review of types
+
+R has 5 atomic data types:
+\vspace{12pt}
+
+###Characters
+```{r}
+obj<-'Thursday'
+obj
+obj<-'This is also a character.'
+obj
+```
+\vspace{12pt}
+
+###Integers and Doubles (doubles sometimes called 'numeric')
+```{r}
+obj<-6
+#example of a numeric
+obj
+typeof(obj)
+obj<-as.integer(6)
+#example of an integer
+obj
+typeof(obj)
+```
+\vspace{12pt}
+
+###Logicals
+```{r}
+obj<-TRUE
+#example of a logical (note lack of quotations in the definition)
+obj
+typeof(obj)
+#OR
+obj<-FALSE
+obj
+```
+\vspace{12pt}
+
+and complex numbers, which we won't discuss.
+
+#Data Structures in R
+
+R is an object-oriented language:
+
+  + Data are stored in objects
+  + Tasks are carried out by manipulating these objects
+
+
+There are lots of different ways to arrange data in R.
+
+Each specific way is called a 'data structure.'
+\vspace{12pt}
+
+##Vectors
+The simplest type of data structure is called a `vector`.
+```{r}
+v_1<-c(1, 2, 3, 4, 5)
+v_1
+```
+
+\vspace{12pt}
+
+Try making a vector of characters. Name the vector `v_2`.
+\vspace{12pt}
+
+Run `typeof()` on the vectors `v_1` and `v_2`.
+\vspace{12pt}
+
+Try making a vector of some combination of numbers and characters.
+\vspace{12pt}
+
+In R, lots of functions are vectorized, meaning we can just pass the function or operation vectors, instead of passing individual scalars.
+
+```{r}
+6 + 6
+```
+
+Make a third vector containing the numbers 6 through 10. Name it `v_3`.
+\vspace{12pt}
+
+See what happens when you add this to `v_1` using the `+` operator. 
+\vspace{12pt}
+
+Repeat this with other operators:
+
+  + Subtraction (`-`)
+  + Multiplication (`*`)
+  + blah blah you get the point.
+
+\vspace{12pt}
+
+###Indexing Vectors
+The position of an entry in a vector is its _index_.
+
+Revisiting the vector `v_3`:
+```{r}
+v_3
+```
+
+This vector has 5 elements. We can access individual elements using `v_3[]`.
+
+```{r}
+#Print the 3rd entry.
+v_3[3]
+```
+
+Try printing one of the entries in your character vector `v_2`.
+\vspace{12pt}
+
+
+  
+##Lists
+Similarly to a `vector`, a `list` can be viewed as a sequence.
+
+Unlike a `vector`, a `list` can support heterogeneous data types and can have >1 dimension.
+
+```{r}
+l_1<-list(1, 2, 3, 4)
+l_1<-list(v_1)
+```
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
