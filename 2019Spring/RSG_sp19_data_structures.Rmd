@@ -106,34 +106,63 @@ The position of an entry in a vector is its _index_.
 
 Revisiting the vector `v_3`:
 ```{r}
-v_3
+v_3<-c(6, 7, 8, 9, 10)
 ```
 
 This vector has 5 elements. We can access individual elements using `v_3[]`.
 
 ```{r}
-#Print the 3rd entry.
+#print the 3rd entry.
 v_3[3]
 ```
 
 Try printing one of the entries in your character vector `v_2`.
 \vspace{12pt}
 
+Using `[]`, can also subset vectors.
+```{r}
+#print the 2nd - 5th entries
+v_3[2:5]
+```
+\vspace{12pt}
 
-  
+
 ##Lists
 Similarly to a `vector`, a `list` can be viewed as a sequence.
 
-Unlike a `vector`, a `list` can support heterogeneous data types and can have >1 dimension.
+Unlike a `vector`, a `list`:
+
+  (1) can support heterogeneous data types
+  (2) can have >1 dimension.
 
 ```{r}
-l_1<-list(1, 2, 3, 4)
-l_1<-list(v_1)
+l_1<-list(100, 54, 392, 47)
+l_1
+
+#print the first item of the list
+l_1[1]
 ```
 
+Make a list, `l_2`, from some combination types (_e.g._, numbers and characters).
+
+W.R.T. bullet (1) above, how are different types combined into a list vs. a vector?
+
+##Matricies
+Matricies are simple, 2-dimensional data strucutres.
+
+
+  
+##Dataframes
+Dataframes are a super nifty data structure for data analysis.
+  + 2-dimensional
+  + Columns as variables
+  + Rows as observations
   
 
 
+
+
+By subsetting and using the typeof() function, determine which two other data strucutres dataframes are constructed from. 
 
 
 
