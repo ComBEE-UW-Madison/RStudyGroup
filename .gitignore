@@ -5,6 +5,7 @@
 *.Rproj
 *.html
 *.pdf
+!RSG_sp19_data_structures.pdf
 *.sqlite
 Fall2017/data
 Fall2017/networks/Data files
