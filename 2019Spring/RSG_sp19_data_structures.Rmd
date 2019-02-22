@@ -171,6 +171,7 @@ m_1[2,1]
 
 How might you subset an entire row or column?
 \vspace{12pt}
+
 ##Dataframes
 Dataframes are a super nifty data structure for data analysis.
   + 2-dimensional
