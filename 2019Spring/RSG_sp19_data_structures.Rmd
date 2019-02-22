@@ -180,7 +180,7 @@ Dataframes are a super nifty data structure for data analysis.
   
 ```{r}
 #a simple dataframe
-df_1<-data.frame('row_1' = c(1, 2, 3, 4, 5), 'row_2' = c(FALSE, TRUE, TRUE, FALSE, TRUE), 'row_3' = c(10.7, 23.8, 98.7, 23.5, 99.7))
+df_1<-data.frame('col_1' = c(1, 2, 3, 4, 5), 'col_2' = c(FALSE, TRUE, TRUE, FALSE, TRUE), 'col_3' = c(10.7, 23.8, 98.7, 23.5, 99.7))
 df_1
 ```
 
@@ -190,7 +190,7 @@ They can be indexed in a manner similar to matricies.
 df_1[2,3]
 ```
 
-Alternatively, rows can be pulled out using `$`.
+Alternatively, columns can be pulled out using `$`.
 
 ```{r}
 df_1$row_2
