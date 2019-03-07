@@ -6,6 +6,7 @@
 *.html
 *.pdf
 !RSG_sp19_data_structures.pdf
+!RSG_sp19_data_viz.pdf
 *.sqlite
 Fall2017/data
 Fall2017/networks/Data files
