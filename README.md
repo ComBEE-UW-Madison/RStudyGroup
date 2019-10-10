@@ -14,6 +14,8 @@ Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc
 ## Upcoming events
 R study group has been temporarily discontinued as we experiment with a new ['Omics Study Group.](https://github.com/ComBEE-UW-Madison/OmicsStudyGroup) [Click here](https://github.com/ComBEE-UW-Madison/RStudyGroup) to see our previous lessons. 
 
+Special thanks to the [past leaders of R study group](Archive/Past_Leaders.md)!
+
 
 
 
