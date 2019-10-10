@@ -1,0 +1,223 @@
+---
+title: "RSG III: Data Visualization"
+author: "M. Kartje"
+date: "March 7, 2019"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Review of Data structures
+
+I. Vectors
+
+  + Homogeneous
+  + 1-dimensional
+
+EX  
+```{r}
+#a vector of numbers
+vec_1<-c(1, 19, 34, 76)
+vec_1
+#a vector of characters
+vec_2<-c('cat', 'dog', 'rat', 'pet')
+vec_2
+```
+
+
+II. Lists
+
+  + Heterogeneous
+  + 1 - n-dimensional
+  
+EX
+```{r}
+#a list o numbers
+l_1<-list(1, 19, 34, 76)
+l_1
+#a list of characters
+l_2<-list('cat', 'dog', 'rat', 'pet')
+l_2
+#a list of lists
+l_3<-list(l_1, l_2)
+l_3
+#lsit of vectors
+```
+
+
+III. Dataframes
+
+  + List of vectors
+  + 2-dimensional (matrix-like)
+  + Homogeneous or heterogeneous?
+  
+EX
+```{r}
+#The iris dataframe
+head(iris)
+str(iris)
+head(iris[,3])
+head(iris$Petal.Length)
+
+#The cars dataframe
+head(cars)
+str(cars)
+head(cars[,2])
+head(cars$dist)
+```
+
+\vspace{12pt}
+
+Dataframes make plotting easy!
+
+\vspace{12pt}
+
+###Data Visualization
+
+\vspace{12pt}
+
+R has several basic functions for plotting data:
+
+  + `hist()`
+  + `plot()`
+  + `boxplot()`
+
+\vspace{12pt}
+
+These functions are built in -- they come with R when you download it.
+
+Various other plotting packages exist. 
+
+By far, the most popular is ggplot2. 
+We'll get to this today if there's time.
+
+
+##Histograms
+
+1) Look up how to use the `hist()` function using
+`?hist()`
+
+2) Use `hist()` to examine the frequency distribution of petal lengths in thie `iris` dataset.
+
+```{r}
+hist(iris$Petal.Length)
+```
+
+3) Subset the iris dataset to plot each species separately
+```{r}
+df_set<-subset(iris, Species == 'setosa')
+df_ver<-subset(iris, Species == 'versicolor')
+df_vir<-subset(iris, Species == 'virginica')
+
+#use par() to partition
+par(mfrow = c(1, 3))
+hist(df_set$Petal.Length)
+hist(df_ver$Petal.Length)
+hist(df_vir$Petal.Length)
+```
+
+\vspace{12pt}
+
+It looks like different species have different distributions of petal length...
+How to best visualize this? 
+
+\vspace{16pt}
+
+##Boxplots
+
+Boxplots allow for comparison of data across different levels of a factor.
+\vspace{12pt}
+Look at the help file for boxplots.
+Using this info, construct a boxplot showing petal length vs. species
+
+```{r}
+#boxplot of petal length vs. species
+boxplot(iris$Petal.Length ~ iris$Species)
+```
+
+1st, 2nd and 3rd quartiles (25, 50, 75 quantiles)
+
+\vspace{12pt}
+
+Let's look at another variable -- petal width
+
+```{r}
+#boxplot of petal width
+boxplot(iris$Petal.Width ~ iris$Species)
+```
+
+\vspace{12pt}
+
+The pattern across species seems similar, are these variables correlated in some way? 
+
+
+##Scatterplots
+
+The simplest scatterplots can be constructed using `plot()`.
+
+Examine the `plot()` help file to see how it's used. What do you notice about the way arguments can be supplied?
+
+```{r}
+#scatter plot of petal width vs petal length
+plot(iris$Petal.Length, iris$Petal.Width)
+#add a regression line for fun
+abline(lm(iris$Petal.Width ~ iris$Petal.Length))
+```
+
+###ggplot2
+
+install ggplot2 using `install.packages('ggplot2')
+
+```{r}
+#load ggplot2
+library(ggplot2)
+```
+
+
+We can recreate our plots from above using ggplot
+
+#Histograms
+
+```{r}
+ggplot(iris) +
+  geom_histogram(aes(x = Petal.Length))
+
+#Divide histograms by species as before using facet_wrap()
+ggplot(iris) +
+  geom_histogram(aes(x = Petal.Length)) +
+  facet_wrap(~Species)
+```
+
+#Boxlots
+
+```{r}
+ggplot(iris) +
+  geom_boxplot(aes(x = Species, y = Petal.Length))
+```
+
+#Scatterplots
+
+```{r}
+ggplot(iris) +
+  geom_point(aes(x = Petal.Length, y = Petal.Width)) +
+  facet_wrap(~Species)
+```
+
+
+Using aes(), other variables can be mapped to facets of the plot, like the color, shape or size of points.
+
+```{r}
+ggplot(iris) +
+  geom_point(alpha = 0.4, aes(x = Petal.Length, y = Petal.Width, size = Sepal.Width)) +
+  facet_wrap(~Species) +
+  xlab("Petal Length") + ylab("Petal Width") +
+  #theme_ changes facets of the plot that don't map to data
+  theme_classic()
+```
+
+
+
