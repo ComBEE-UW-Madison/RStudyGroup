@@ -12,15 +12,7 @@ This group of researchers meets bi-weekly to discuss coding in R.
 Sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu).
 
 ## Upcoming events
-R Study Group will be held on alternating Thursdays at 5 PM in Genetics Building room 1408 for the Spring 2019 semester starting January 31st.
-
-To recieve updates about the coming semester meetings, sign up for our listserv by sending a blank email to [join-combee-rsg@lists.wisc.edu](mailto:join-combee-rsg@lists.wisc.edu). 
-
-## Previous Semesters' Meetings
-
-Special thanks to the [past leaders of R study group](Archive/Past_Leaders.md)!
-
-- [Prior to Summer 2017](https://github.com/ComBEE-UW-Madison/RStudyGroup/tree/master/Archive#r-study-group-archive)
+R study group has been temporarily discontinued as we experiment with a new ['Omics Study Group.](https://github.com/ComBEE-UW-Madison/OmicsStudyGroup) [Click here](https://github.com/ComBEE-UW-Madison/RStudyGroup) to see our previous lessons. 
 
 
 

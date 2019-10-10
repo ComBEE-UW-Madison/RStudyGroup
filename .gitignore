@@ -1,3 +1,4 @@
+*.icloud
 .Rproj.user
 .Rhistory
 .RData
