@@ -3,7 +3,10 @@
 Welcome to the ComBEE's R Study Group held at UW-Madison!
 
 ## Join us!
-Sign up for our listserv by sending a blank email to [join-combee@lists.wisc.edu](mailto:join-combee@lists.wisc.edu).
+Join the ComBEE Google Group by filling this form:
+[https://combee-uw-madison.github.io/studyGroup/signupform.html](https://combee-uw-madison.github.io/studyGroup/signupform.html).
+
+Someone on the ComBEE leadership team will manually add you to the Google Group and add you to the Data Science Hub Slack, where we have a channel called #CombEE-general for day-to-day discussions.
 
 ## Upcoming events
 R study group in Spring 2024 will happen every 2 weeks, on Tuesday at 1pm in MSB 4503.
